@@ -81,7 +81,7 @@ class TankClass:
     
     def move(self, movement): #canvas 500x250
         if movement == 1:#arriba
-            if self.position_y+self.step < self.size:
+            if self.position_y - self.step < self.size:
                 self.position_y = self.size
             else:
                 self.position_y -= self.step
@@ -122,7 +122,7 @@ class TankClass:
                         self.tank_orientation -= 7.5
         elif movement == 4:#izquierda
             if self.position_x-self.step < self.size:
-                self.position_x = self.step
+                self.position_x = self.size
             else:
                 self.position_x -= self.step
                 if self.tank_orientation != 180:
