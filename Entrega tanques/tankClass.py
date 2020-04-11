@@ -45,7 +45,7 @@ class TankClass:
         return self.team
     
     def get_pointer_orientation(self):
-        return self.point_orientation
+        return self.pointer_orientation
     
     def set_pointer(self, pointer_pos):
         newX, newY = pointer_pos
@@ -63,15 +63,15 @@ class TankClass:
             pointer_degrees = math.degrees(pointer_radians)
             if diff_x > 0:
                 if diff_y <= 0:
-                    self.point_orientation =  - pointer_degrees
+                    self.pointer_orientation =  - pointer_degrees
                 else:
-                    self.point_orientation = 360 - pointer_degrees
+                    self.pointer_orientation = 360 - pointer_degrees
             else:
-                self.point_orientation = 180 - pointer_degrees
-        print(self.point_orientation)
+                self.pointer_orientation = 180 - pointer_degrees
+        print(self.pointer_orientation)
     
     def shoot(self):
-        pointer_radiants = math.radians(self.point_orientation)
+        pointer_radiants = math.radians(self.pointer_orientation)
         length_canon = 20
         canon_x = length_canon*math.cos(pointer_radiants)
         canon_y = length_canon*math.sin(pointer_radiants)
