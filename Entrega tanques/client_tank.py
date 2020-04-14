@@ -152,7 +152,7 @@ if __name__ == '__main__':
     frame = Frame(root)    
     frame.pack()
 
-    canvas = Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="yellow") 
+    canvas = Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="black") 
     canvas.pack()
     
     shoot = False
