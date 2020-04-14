@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#test edit
 
 #Definimos el tablero, recurso en competencia
 #Pensar en la estructura de datos... es quizás los más interesante
