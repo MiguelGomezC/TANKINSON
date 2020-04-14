@@ -8,7 +8,7 @@ from multiprocessing import Queue
 from tkinter import *
 import time, random
 import tankClass
-
+last_movement = 0
 
 #Constants inicialization
 
