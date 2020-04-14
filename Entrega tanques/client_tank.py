@@ -260,32 +260,44 @@ if __name__ == '__main__':
     conn = Client(address=('127.0.0.1', 6000), authkey=b'secret')
     print ('connection accepted')
 
-    try:
-        while 1:
+    def normal_act():
+        global shoot
+        global movement
+        pointer_position = (pointer_x, pointer_y)
+        state = (pointer_position, movement, shoot)
+        conn.send(state)
+        message = conn.recv()
+        shoot = False
+        draw_board(canvas, message)
+    
+    def repet_act():
+        global shoot
+        global movement
+        key = movement
+        for i in range(15):
             pointer_position = (pointer_x, pointer_y)
-            state = (pointer_position, movement, shoot)
-            if movement == last_movement or movement == 0:    
-                conn.send(state)
-                message = conn.recv()
-            else:
-                key = movement
-                for i in range(12):
-                    pointer_position = (pointer_x, pointer_y)
-                    state = (pointer_position, movement, shoot)
-                    conn.send(state)
-                    shoot = False
-                    message = conn.recv()
-                    draw_board(canvas, message)
-                    root.update()
-                    time.sleep(0.03)
-                    if movement != key:
-                        break
-            if movement != 0:
-                last_movement = movement
+            state = (pointer_position, key, shoot)
+            conn.send(state)
             shoot = False
-            movement = 0
+            message = conn.recv()
             draw_board(canvas, message)
             root.update()
+            time.sleep(0.03)
+            if movement != key:
+                repet_act()
+                break
+
+    try:
+        while 1:
+            if movement == last_movement or movement == 0:
+                normal_act()
+            else:
+                repet_act()
+            if movement != 0:
+                last_movement = movement
+            movement = 0
+            root.update()
+
     except TclError:
         pass
    
