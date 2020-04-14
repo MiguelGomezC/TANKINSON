@@ -13,7 +13,8 @@ import tankClass
 #Constants inicialization
 
 CANVAS_WIDTH = 500
-CANVAS_HEIGHT = 250
+CANVAS_HEIGHT = 300
+CANVAS_SCORE = 50
 
 def draw_board(canvas, message):
     canvas.delete('all')
@@ -142,6 +143,8 @@ def draw_board(canvas, message):
             canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_blue_img, anchor=NW)
         else:
             canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_red_img, anchor=NW)
+    #Para crear el marcador,solo hay un rectangulo azul ahora mismo
+    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="blue")
 
 if __name__ == '__main__':    
 
@@ -154,6 +157,8 @@ if __name__ == '__main__':
 
     canvas = Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="yellow") 
     canvas.pack()
+    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="blue")#rectangulo azul para el marcador
+    
     
     shoot = False
     pointer_x, pointer_y = 0,0
