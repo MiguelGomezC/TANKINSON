@@ -19,16 +19,16 @@ class TankClass:
         self.team = team
         if team == 1:
             self.position_x = 50
-            self.position_y = 175
+            self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.pointer_x = 250
-            self.pointer_y = 175
+            self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.tank_orientation = 360
             self.pointer_orientation = 180
         else:
             self.position_x = 450
-            self.position_y = 175
+            self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.pointer_x = 250
-            self.pointer_y = 175
+            self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.tank_orientation = 180
             self.pointer_orientation = 360
     
@@ -85,51 +85,51 @@ class TankClass:
                 self.position_y = self.size+CANVAS_SCORE
             else:
                 self.position_y -= self.step
-                if self.tank_orientation != 90:
-                    if self.tank_orientation < 90:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 270:
-                        self.tank_orientation -= 7.5
-                    elif self.tank_orientation >= 360:
-                        self.tank_orientation = 7.5
-                    else:
-                        self.tank_orientation += 7.5
+            if self.tank_orientation != 90:
+                if self.tank_orientation < 90:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 270:
+                    self.tank_orientation -= 7.5
+                elif self.tank_orientation >= 360:
+                    self.tank_orientation = 7.5
+                else:
+                    self.tank_orientation += 7.5
         elif movement == 2:#derecha
-            if self.position_x+self.step> CANVAS_WIDTH-self.size:#Así podemos modificar el tablero y deberia afectar al juego
+            if self.position_x+self.step> CANVAS_WIDTH-self.size:#Así podemos modificar el tablero y no deberia afectar al juego
                 self.position_x = CANVAS_WIDTH-self.size
             else:
                 self.position_x += self.step
-                if self.tank_orientation != 360:
-                    if self.tank_orientation >= 180:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 7.5:
-                        self.tank_orientation = 360
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 360:
+                if self.tank_orientation >= 180:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 7.5:
+                    self.tank_orientation = 360
+                else:
+                    self.tank_orientation -= 7.5
         elif movement == 3:#abajo
             if self.position_y+self.step > CANVAS_HEIGHT-self.size:
                 self.position_y = CANVAS_HEIGHT-self.size
             else:
                 self.position_y += self.step
-                if self.tank_orientation != 270:
-                    if self.tank_orientation > 270:
-                        self.tank_orientation -= 7.5
-                    elif self.tank_orientation >= 90:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 7.5:
-                        self.tank_orientation = 360
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 270:
+                if self.tank_orientation > 270:
+                    self.tank_orientation -= 7.5
+                elif self.tank_orientation >= 90:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 7.5:
+                    self.tank_orientation = 360
+                else:
+                    self.tank_orientation -= 7.5
         elif movement == 4:#izquierda
             if self.position_x-self.step < self.size:
                 self.position_x = self.size
             else:
                 self.position_x -= self.step
-                if self.tank_orientation != 180:
-                    if self.tank_orientation < 180:
-                        self.tank_orientation += 7.5
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 180:
+                if self.tank_orientation < 180:
+                    self.tank_orientation += 7.5
+                else:
+                    self.tank_orientation -= 7.5
 
 
 
@@ -164,13 +164,13 @@ class BulletClass:
             else:
                 self.bounce = True
                 if newX < 0:
-                    self.position_x = 0 #abs(newX) Se "mete" con abs(newX) no rebota del todo
+                    self.position_x = 15 #abs(newX) Se "mete" con abs(newX) no rebota del todo
                     self.increment_x *= -1
                 elif newX > CANVAS_WIDTH:
                     self.position_x = 2*CANVAS_WIDTH - newX
                     self.increment_x *= -1
                 elif newY < CANVAS_SCORE:
-                    self.position_y = CANVAS_SCORE#abs(newY) Se "mete" con abs(newY) no rebota del todo
+                    self.position_y = CANVAS_SCORE+15#abs(newY) Se "mete" con abs(newY) no rebota del todo
                     self.increment_y *= -1
                 elif newY > CANVAS_HEIGHT:
                     self.position_y = 2*CANVAS_HEIGHT - newY
