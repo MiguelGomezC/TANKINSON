@@ -45,8 +45,10 @@ def move_bullets(board_bullets, semaphore_bullets, board_tanks):
             bullet = board_bullets.get()
             bullet_state = bullet.move()
             collision=False
-            for tank in board_tanks and collision:
-                collision=bullet.impact(tank)
+            for tank in board_tanks:
+                collision=bullet.impact(board_tanks[tank])
+                if collision:
+                    break
             if bullet_state and not collision:
                 board_bullets.put(bullet)
         semaphore_bullets.release()
