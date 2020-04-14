@@ -164,13 +164,13 @@ class BulletClass:
             else:
                 self.bounce = True
                 if newX < 0:
-                    self.position_x = abs(newX)
+                    self.position_x = 0 #abs(newX) Se "mete" con abs(newX) no rebota del todo
                     self.increment_x *= -1
                 elif newX > CANVAS_WIDTH:
                     self.position_x = 2*CANVAS_WIDTH - newX
                     self.increment_x *= -1
                 elif newY < CANVAS_SCORE:
-                    self.position_y = abs(newY)
+                    self.position_y = CANVAS_SCORE#abs(newY) Se "mete" con abs(newY) no rebota del todo
                     self.increment_y *= -1
                 elif newY > CANVAS_HEIGHT:
                     self.position_y = 2*CANVAS_HEIGHT - newY
