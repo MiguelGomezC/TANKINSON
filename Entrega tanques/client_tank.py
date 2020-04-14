@@ -236,10 +236,26 @@ if __name__ == '__main__':
         while 1:
             pointer_position = (pointer_x, pointer_y)
             state = (pointer_position, movement, shoot)
-            conn.send(state)
+            if movement == last_movement or movement == 0:    
+                conn.send(state)
+                message = conn.recv()
+            else:
+                key = movement
+                for i in range(12):
+                    pointer_position = (pointer_x, pointer_y)
+                    state = (pointer_position, movement, shoot)
+                    conn.send(state)
+                    shoot = False
+                    message = conn.recv()
+                    draw_board(canvas, message)
+                    root.update()
+                    time.sleep(0.03)
+                    if movement != key:
+                        break
+            if movement != 0:
+                last_movement = movement
             shoot = False
             movement = 0
-            message = conn.recv()
             draw_board(canvas, message)
             root.update()
     except TclError:
