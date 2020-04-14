@@ -188,6 +188,7 @@ if __name__ == '__main__':
     shoot = False
     pointer_x, pointer_y = 0,0
     movement = 0
+    last_movement = 0
     
     tank_img_1 = PhotoImage(file='images/tank_1.png')
     tank_img_2 = PhotoImage(file='images/tank_2.png')
