@@ -8,27 +8,27 @@ import numpy
 #Constants inicialization
 
 CANVAS_WIDTH = 500
-CANVAS_HEIGHT = 250
-
+CANVAS_HEIGHT = 300
+CANVAS_SCORE = 50
 
 class TankClass:
     def __init__(self, team, id):
         self.step = 3
-        self.size = 20#1/2 ancho del tanque (esta mal, hay que mirar las fotos)
+        self.size = 29.5 #1/2 largo
         self.id = id
         self.team = team
         if team == 1:
             self.position_x = 50
-            self.position_y = 125
+            self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.pointer_x = 250
-            self.pointer_y = 125
+            self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.tank_orientation = 360
             self.pointer_orientation = 180
         else:
             self.position_x = 450
-            self.position_y = 125
+            self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.pointer_x = 250
-            self.pointer_y = 125
+            self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
             self.tank_orientation = 180
             self.pointer_orientation = 360
     
@@ -79,57 +79,57 @@ class TankClass:
         deviation_y = 3
         return BulletClass(self.team, self.position_x+canon_x+deviation_x, self.position_y-canon_y+deviation_y, self.pointer_x, self.pointer_y)
     
-    def move(self, movement): #canvas 500x250
+    def move(self, movement): #canvas 500x300
         if movement == 1:#arriba
-            if self.position_y - self.step < self.size:
-                self.position_y = self.size
+            if self.position_y - self.step < self.size+CANVAS_SCORE:#Los CANVAS_SCORE para salvar el marcador
+                self.position_y = self.size+CANVAS_SCORE
             else:
                 self.position_y -= self.step
-                if self.tank_orientation != 90:
-                    if self.tank_orientation < 90:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 270:
-                        self.tank_orientation -= 7.5
-                    elif self.tank_orientation >= 360:
-                        self.tank_orientation = 7.5
-                    else:
-                        self.tank_orientation += 7.5
+            if self.tank_orientation != 90:
+                if self.tank_orientation < 90:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 270:
+                    self.tank_orientation -= 7.5
+                elif self.tank_orientation >= 360:
+                    self.tank_orientation = 7.5
+                else:
+                    self.tank_orientation += 7.5
         elif movement == 2:#derecha
-            if self.position_x+self.step> 500-self.size:
-                self.position_x = 500-self.size
+            if self.position_x+self.step> CANVAS_WIDTH-self.size:#Así podemos modificar el tablero y no deberia afectar al juego
+                self.position_x = CANVAS_WIDTH-self.size
             else:
                 self.position_x += self.step
-                if self.tank_orientation != 360:
-                    if self.tank_orientation >= 180:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 7.5:
-                        self.tank_orientation = 360
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 360:
+                if self.tank_orientation >= 180:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 7.5:
+                    self.tank_orientation = 360
+                else:
+                    self.tank_orientation -= 7.5
         elif movement == 3:#abajo
-            if self.position_y+self.step > 250-self.size:
-                self.position_y = 250-self.size
+            if self.position_y+self.step > CANVAS_HEIGHT-self.size:
+                self.position_y = CANVAS_HEIGHT-self.size
             else:
                 self.position_y += self.step
-                if self.tank_orientation != 270:
-                    if self.tank_orientation > 270:
-                        self.tank_orientation -= 7.5
-                    elif self.tank_orientation >= 90:
-                        self.tank_orientation += 7.5
-                    elif self.tank_orientation <= 7.5:
-                        self.tank_orientation = 360
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 270:
+                if self.tank_orientation > 270:
+                    self.tank_orientation -= 7.5
+                elif self.tank_orientation >= 90:
+                    self.tank_orientation += 7.5
+                elif self.tank_orientation <= 7.5:
+                    self.tank_orientation = 360
+                else:
+                    self.tank_orientation -= 7.5
         elif movement == 4:#izquierda
             if self.position_x-self.step < self.size:
                 self.position_x = self.size
             else:
                 self.position_x -= self.step
-                if self.tank_orientation != 180:
-                    if self.tank_orientation < 180:
-                        self.tank_orientation += 7.5
-                    else:
-                        self.tank_orientation -= 7.5
+            if self.tank_orientation != 180:
+                if self.tank_orientation < 180:
+                    self.tank_orientation += 7.5
+                else:
+                    self.tank_orientation -= 7.5
 
 
 
@@ -154,7 +154,7 @@ class BulletClass:
         """
         newX = self.position_x + self.increment_x
         newY = self.position_y + self.increment_y
-        if newX >= 0 and newX <= 500 and newY >= 0 and newY <= 250:#Choca con algo, de momento solo bordes
+        if newX >= 0 and newX <= CANVAS_WIDTH and newY >= CANVAS_SCORE and newY <= CANVAS_HEIGHT:#Choca con algo, de momento solo bordes
             self.position_x = newX
             self.position_y = newY
             return True
@@ -164,16 +164,16 @@ class BulletClass:
             else:
                 self.bounce = True
                 if newX < 0:
-                    self.position_x = abs(newX)
+                    self.position_x = 15 #abs(newX) Se "mete" con abs(newX) no rebota del todo
                     self.increment_x *= -1
-                elif newX > 500:
-                    self.position_x = 1000 - newX
+                elif newX > CANVAS_WIDTH:
+                    self.position_x = 2*CANVAS_WIDTH - newX
                     self.increment_x *= -1
-                elif newY < 0:
-                    self.position_y = abs(newY)
+                elif newY < CANVAS_SCORE:
+                    self.position_y = CANVAS_SCORE+15#abs(newY) Se "mete" con abs(newY) no rebota del todo
                     self.increment_y *= -1
-                elif newY > 250:
-                    self.position_y = 500 - newY
+                elif newY > CANVAS_HEIGHT:
+                    self.position_y = 2*CANVAS_HEIGHT - newY
                     self.increment_y *= -1
                 return True
                     

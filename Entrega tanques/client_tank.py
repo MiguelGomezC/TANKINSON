@@ -13,7 +13,8 @@ import tankClass
 #Constants inicialization
 
 CANVAS_WIDTH = 500
-CANVAS_HEIGHT = 250
+CANVAS_HEIGHT = 300
+CANVAS_SCORE = 50
 
 def draw_board(canvas, message):
     canvas.delete('all')
@@ -142,6 +143,33 @@ def draw_board(canvas, message):
             canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_blue_img, anchor=NW)
         else:
             canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_red_img, anchor=NW)
+    #Para crear el marcador,solo hay un rectangulo gris ahora mismo si va a grey99 ->negro y grey1->blanco y entre medias los demas tonos de gris
+    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey70")
+    canvas.create_rectangle(10, 10, 150, 40, fill= "grey50")
+    canvas.create_rectangle(340, 10, 490, 40, fill= "grey50")
+    canvas.create_text(50, 25, text="Equipo 1", fill="black", font=("Arial", 15))
+    canvas.create_text(380, 25, text="Equipo 2", fill="black", font=("Arial", 15))
+    #ESTRELLAS GRISES (EQUIPO 1)
+    
+    #canvas.create_image(95,20,image = estrella_gris, anchor= NW)
+    #canvas.create_image(110,20,image = estrella_gris, anchor= NW)
+    canvas.create_image(125,20,image = estrella_gris, anchor= NW)
+    
+    #ESTRELLAS AMARILLAS (EQUIPO 1)
+    canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
+    canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(125,20,image = estrella_amarilla, anchor= NW)
+
+    #ESTRELLAS GRISES (EQUIPO 2)
+    
+    #canvas.create_image(425,20,image = estrella_gris, anchor= NW)
+    canvas.create_image(440,20,image = estrella_gris, anchor= NW)
+    canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+    
+    #ESTRELLAS AMARILLAS (EQUIPO 2)
+    canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
 
 if __name__ == '__main__':    
 
@@ -154,6 +182,8 @@ if __name__ == '__main__':
 
     canvas = Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="black") 
     canvas.pack()
+    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey50")#rectangulo gris para el marcador
+    
     
     shoot = False
     pointer_x, pointer_y = 0,0
@@ -196,6 +226,9 @@ if __name__ == '__main__':
     big_bullet_img = PhotoImage(file='images/big_bullet.png')
     small_bullet_blue_img = PhotoImage(file='images/small_bullet_blue.png')
     small_bullet_red_img = PhotoImage(file='images/small_bullet_red.png')
+ 
+    estrella_amarilla = PhotoImage(file='images/amarilla2.png')
+    estrella_gris =  PhotoImage(file='images/gris2.png')
 
     
     def aiming(event):        
@@ -231,10 +264,26 @@ if __name__ == '__main__':
         while 1:
             pointer_position = (pointer_x, pointer_y)
             state = (pointer_position, movement, shoot)
-            conn.send(state)
+            if movement == last_movement or movement == 0:    
+                conn.send(state)
+                message = conn.recv()
+            else:
+                key = movement
+                for i in range(12):
+                    pointer_position = (pointer_x, pointer_y)
+                    state = (pointer_position, movement, shoot)
+                    conn.send(state)
+                    shoot = False
+                    message = conn.recv()
+                    draw_board(canvas, message)
+                    root.update()
+                    time.sleep(0.03)
+                    if movement != key:
+                        break
+            if movement != 0:
+                last_movement = movement
             shoot = False
             movement = 0
-            message = conn.recv()
             draw_board(canvas, message)
             root.update()
     except TclError:
