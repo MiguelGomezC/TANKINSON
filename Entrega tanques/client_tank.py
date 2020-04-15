@@ -170,7 +170,14 @@ def draw_board(canvas, message):
     canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
-
+    
+    #Tablero1
+    canvas.create_line(100,50,100,120,fill="grey99")
+    canvas.create_line(400,50,400,120,fill="grey99")
+    canvas.create_line(100,230,100,300,fill="grey99")
+    canvas.create_line(400,230,400,300,fill="grey99")
+    canvas.create_rectangle(170,140,330,210,fill="grey99")
+    
 if __name__ == '__main__':    
 
     root = Tk()
