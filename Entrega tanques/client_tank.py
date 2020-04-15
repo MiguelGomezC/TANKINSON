@@ -171,6 +171,23 @@ def draw_board(canvas, message):
     #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
     
+    #Has perdido
+    """
+    canvas.create_rectangle(40, 40, 460, 260,fill= "yellow")
+    canvas.create_rectangle(60, 60, 440, 240,fill= "grey30")
+    canvas.create_text(245, 100, text="GAME OVER", fill="black", font=("Arial", 40, "bold"))
+    canvas.create_image(110,135,image = estrella_gameover, anchor= NW)
+    canvas.create_image(200,135,image = estrella_gameover, anchor= NW)
+    canvas.create_image(290,135,image = estrella_gameover, anchor= NW)
+    """
+    #Has ganado
+    """
+    canvas.create_rectangle(40, 40, 460, 260,fill= "yellow")
+    canvas.create_rectangle(50, 50, 450, 250,fill= "grey20")
+    canvas.create_text(245, 100, text="YOU WIN!", fill="yellow", font=("Arial", 40, "bold"))
+    canvas.create_image(200,135,image = trofeo, anchor= NW)
+    """
+    
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
         canvas.create_line(400,50,400,120,fill="grey99")
@@ -237,6 +254,8 @@ if __name__ == '__main__':
  
     estrella_amarilla = PhotoImage(file='images/amarilla2.png')
     estrella_gris =  PhotoImage(file='images/gris2.png')
+    estrella_gameover = PhotoImage(file='images/gris4.png')
+    trofeo = PhotoImage(file='images/trofeo.png')
 
     
     def aiming(event):        
