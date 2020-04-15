@@ -80,11 +80,19 @@ class TankClass:
         return BulletClass(self.team, self.position_x+canon_x+deviation_x, self.position_y-canon_y+deviation_y, self.pointer_x, self.pointer_y)
     
     def move(self, movement): #canvas 500x300
+        mapa=1
         if movement == 1:#arriba
-            if self.position_y - self.step < self.size+CANVAS_SCORE:#Los CANVAS_SCORE para salvar el marcador
-                self.position_y = self.size+CANVAS_SCORE
-            else:
-                self.position_y -= self.step
+            if mapa==1:
+                if self.position_y >= 210 and self.position_y-self.size_l<=210 and self.position_x+self.size_w>=170 and self.position_x-self.size_w<=330:
+                    self.position_y=210+self.size_l
+                elif self.position_x+self.size_w >= 400 and self.position_x-self.size_w<=400 and self.position_y-self.size_l<=120:
+                    self.position_y=120+self.size_l
+                elif self.position_x+self.size_w >= 100 and self.position_x-self.size_w<=100 and self.position_y-self.size_l<=120:
+                    self.position_y=120+self.size_l
+                elif self.position_y - self.step < self.size_l+CANVAS_SCORE:
+                    self.position_y = self.size_l+CANVAS_SCORE
+                else:
+                    self.position_y -= self.step
             if self.tank_orientation != 90:
                 if self.tank_orientation < 90:
                     self.tank_orientation += 7.5
@@ -94,11 +102,19 @@ class TankClass:
                     self.tank_orientation = 7.5
                 else:
                     self.tank_orientation += 7.5
+                    
         elif movement == 2:#derecha
-            if self.position_x+self.step> CANVAS_WIDTH-self.size:#Así podemos modificar el tablero y no deberia afectar al juego
-                self.position_x = CANVAS_WIDTH-self.size
-            else:
-                self.position_x += self.step
+            if mapa==1:
+                if self.position_x<=100 and self.position_x+self.size_l>=100 and (self.position_y-self.size_w<=120 or self.position_y+self.size_w>=230):
+                    self.position_x =100-self.size_l
+                elif self.position_x<=400 and self.position_x+self.size_l>=400 and (self.position_y-self.size_w<=120 or self.position_y+self.size_w>=230):
+                    self.position_x=400-self.size_l
+                elif self.position_x<=170 and self.position_x+self.size_l >=170 and self.position_y+self.size_w>=140 and self.position_y-self.size_w<=210:
+                    self.position_x=170-self.size_l
+                elif self.position_x+self.step> CANVAS_WIDTH-self.size_l:
+                    self.position_x = CANVAS_WIDTH-self.size_l
+                else:
+                    self.position_x += self.step
             if self.tank_orientation != 360:
                 if self.tank_orientation >= 180:
                     self.tank_orientation += 7.5
@@ -107,10 +123,17 @@ class TankClass:
                 else:
                     self.tank_orientation -= 7.5
         elif movement == 3:#abajo
-            if self.position_y+self.step > CANVAS_HEIGHT-self.size:
-                self.position_y = CANVAS_HEIGHT-self.size
-            else:
-                self.position_y += self.step
+            if mapa==1:
+                if self.position_y<=140 and self.position_y+self.size_l>=140 and self.position_x+self.size_w>= 170 and self.position_x-self.size_w<=330:
+                    self.position_y=140-self.size_l
+                elif self.position_x+self.size_w >= 400 and self.position_x-self.size_w<=400 and self.position_y+self.size_l>=230:
+                    self.position_y=230-self.size_l
+                elif self.position_x+self.size_w >= 100 and self.position_x-self.size_w<=100 and self.position_y+self.size_l>=230:
+                    self.position_y=230-self.size_l
+                elif self.position_y+self.step > CANVAS_HEIGHT-self.size_l:
+                    self.position_y = CANVAS_HEIGHT-self.size_l
+                else:
+                    self.position_y += self.step
             if self.tank_orientation != 270:
                 if self.tank_orientation > 270:
                     self.tank_orientation -= 7.5
@@ -121,10 +144,17 @@ class TankClass:
                 else:
                     self.tank_orientation -= 7.5
         elif movement == 4:#izquierda
-            if self.position_x-self.step < self.size:
-                self.position_x = self.size
-            else:
-                self.position_x -= self.step
+            if mapa==1:
+                if self.position_x>=400 and self.position_x-self.size_l<=400 and (self.position_y-self.size_w<=120 or self.position_y+self.size_w>=230):
+                    self.position_x=400+self.size_l
+                elif self.position_x>=100 and self.position_x-self.size_l<=100 and (self.position_y-self.size_w <=120 or self.position_y+self.size_w >= 230):
+                    self.position_x=100+self.size_l
+                elif self.position_x>=330 and self.position_x-self.size_l<=330  and self.position_y-self.size_w<=210 and self.position_y+self.size_w>=140:
+                    self.position_x = 330 + self.size_l
+                elif self.position_x-self.step < self.size_l:
+                    self.position_x = self.size_l
+                else:
+                    self.position_x -= self.step
             if self.tank_orientation != 180:
                 if self.tank_orientation < 180:
                     self.tank_orientation += 7.5
@@ -143,7 +173,7 @@ class BulletClass:
         self.position_y = position_y
         distance_x = target_x - position_x
         distance_y = target_y - position_y
-        self.bounce = False
+        self.bounce = 0
         module = math.sqrt(distance_x**2 + distance_y**2)
         self.increment_x = float(distance_x)/module*self.velocity
         self.increment_y = float(distance_y)/module*self.velocity
@@ -152,30 +182,58 @@ class BulletClass:
         """
         Output: Si se debe mantener la bala o no, es decir, si aún no ha chocado 2 veces.
         """
+        mapa=1
         newX = self.position_x + self.increment_x
         newY = self.position_y + self.increment_y
-        if newX >= 0 and newX <= CANVAS_WIDTH and newY >= CANVAS_SCORE and newY <= CANVAS_HEIGHT:#Choca con algo, de momento solo bordes
-            self.position_x = newX
-            self.position_y = newY
-            return True
-        else:
-            if self.bounce:
+        print("YLA DE DESPUES SUPONGO",self.position_x,"la nueva ",newX)
+        if mapa == 1:
+            if self.bounce==2:
                 return False
+            elif ((self.position_x<=100 and newX>=100)or(self.position_x>100 and newX<=100)) and (newY<=120 or newY>=230):
+                self.bounce+=1
+                print("oieeeeeee que es",self.position_x," y la otra",newX)
+                self.position_x=200-newX
+                self.increment_x *= -1
+            elif self.position_x<170 and newX>=170 and newY>=140 and newY<=230:
+                self.position_x=340-newX
+                self.bounce +=1
+                self.increment_x *= -1
+            elif ((self.position_x<400 and newX>=400) or (self.position_x>400 and newX<=400))and (newY<120 or newY>230):
+                self.position_x=800-newX
+                self.bounce+=1
+                self.increment_x *= -1
+            elif newX > CANVAS_WIDTH:
+                self.position_x = 2*CANVAS_WIDTH - newX
+                self.bounce+=1
+                self.increment_x *= -1
+            elif self.position_x>330 and newX<=330 and newY>140 and newY<230:
+                self.position_x=660-newX
+                self.bounce +=1
+                self.increment_x *= -1
+            elif newX<0:
+                self.position_x = 15
+                self.bounce +=1
+                self.increment_x *= -1
+            elif self.position_y>210 and newY<=210 and newX>=100 and newX<=400:
+                self.position_y=420-newY
+                self.bounce +=1
+                self.increment_y *= -1
+            elif self.position_y<140 and newY>=140 and newX>=100 and newX<=400:
+                self.position_y=280-newY
+                self.bounce+=1
+                self.increment_y *= -1
+            elif newY > CANVAS_HEIGHT:
+                self.position_y = 2*CANVAS_HEIGHT - newY
+                self.bounce +=1
+                self.increment_y *= -1
+            elif newY < CANVAS_SCORE:
+                self.position_y = CANVAS_SCORE+15
+                self.bounce +=1
+                self.increment_y *= -1
             else:
-                self.bounce = True
-                if newX < 0:
-                    self.position_x = 15 #abs(newX) Se "mete" con abs(newX) no rebota del todo
-                    self.increment_x *= -1
-                elif newX > CANVAS_WIDTH:
-                    self.position_x = 2*CANVAS_WIDTH - newX
-                    self.increment_x *= -1
-                elif newY < CANVAS_SCORE:
-                    self.position_y = CANVAS_SCORE+15#abs(newY) Se "mete" con abs(newY) no rebota del todo
-                    self.increment_y *= -1
-                elif newY > CANVAS_HEIGHT:
-                    self.position_y = 2*CANVAS_HEIGHT - newY
-                    self.increment_y *= -1
-                return True
+                self.position_x = newX
+                self.position_y = newY
+            return True
                     
         
     def get_position(self):
