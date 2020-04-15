@@ -185,51 +185,51 @@ class BulletClass:
                 if t_orientation > 304:
                     if t_orientation > 326.5:
                         if t_orientation > 349:
-                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team()) #5
+                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
                         else:
-                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#6
+                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #6
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#7
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #7
                 else:
                     if t_orientation > 281.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#8
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #8
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#9
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #9
             else:
                 if t_orientation > 214:
                     if t_orientation > 236:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#10
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #10
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#11
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #11
                 else:
                     if t_orientation > 191.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#12
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #12
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#13
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #13
             
         else:
             if t_orientation > 79:
                 if t_orientation > 124:
                     if t_orientation > 146.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#14
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #14
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#15
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #15
                 else:
                     if t_orientation > 101.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#16
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #16
                     else:
-                       return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())
+                       return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) 
             else:
                 if t_orientation > 34:
                     if t_orientation > 56.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#2
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #2
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#3
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #3
                 else:
                     if t_orientation > 11.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#4
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #4
                     else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-26<=self.position_y<=y_tank+26) and (self.get_team()!=tank.get_team())#5
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
 
         
                     
