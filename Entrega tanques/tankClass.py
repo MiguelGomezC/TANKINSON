@@ -186,47 +186,74 @@ class BulletClass:
         if mapa == 1:
             if self.bounce==2:
                 return False
-            elif ((self.position_x<=100 and newX>=100)or(self.position_x>100 and newX<=100)) and (newY<=120 or newY>=230):
+            
+            elif self.position_x<=100 and newX>=100and (newY<=120 or newY>=230):
+                print("AID->",self.position_x,",la nueva",newX)
                 self.bounce+=1
                 self.position_x=200-newX
                 self.increment_x *= -1
-            elif self.position_x<170 and newX>=170 and newY>=140 and newY<=230:
+                
+            elif self.position_x>=105 and newX<=105 and (newY<=120 or newY>=230):
+                print("AII<-",self.position_x,",la nueva",newX)
+                self.bounce+=1
+                self.position_x=210-newX
+                self.increment_x *= -1
+                
+            elif self.position_x<=170 and newX>=170 and newY>=140 and newY<=230:
+                print("MD->",self.position_x,",la nueva",newX)
                 self.position_x=340-newX
                 self.bounce +=1
                 self.increment_x *= -1
-            elif ((self.position_x<400 and newX>=400) or (self.position_x>400 and newX<=400))and (newY<120 or newY>230):
+             
+            elif self.position_x<=400 and newX>=400 and (newY<120 or newY>230):
+                print("BD->",self.position_x,",la nueva",newX)
                 self.position_x=800-newX
                 self.bounce+=1
                 self.increment_x *= -1
+            
+            elif self.position_x>=405 and newX<=405 and (newY<120 or newY>230):
+                print("BD<-",self.position_x,",la nueva",newX)
+                self.position_x=810-newX
+                self.bounce+=1
+                self.increment_x *= -1
+                
             elif newX > CANVAS_WIDTH:
+                print("D->",self.position_x,",la nueva",newX)
                 self.position_x = 2*CANVAS_WIDTH - newX
                 self.bounce+=1
                 self.increment_x *= -1
-            elif self.position_x>330 and newX<=330 and newY>140 and newY<230:
-                self.position_x=660-newX
+                
+            elif self.position_x>=335 and newX<=335 and newY>140 and newY<230:
+                self.position_x=670-newX
                 self.bounce +=1
                 self.increment_x *= -1
+            
             elif newX<0:
-                self.position_x = 15
+                self.position_x = abs(newX)+5
                 self.bounce +=1
                 self.increment_x *= -1
-            elif self.position_y>210 and newY<=210 and newX>=100 and newX<=400:
-                self.position_y=420-newY
+                
+            elif self.position_y>=215 and newY<=215 and newX>=170 and newX<=330:
+                self.position_y=430-newY
                 self.bounce +=1
                 self.increment_y *= -1
-            elif self.position_y<140 and newY>=140 and newX>=100 and newX<=400:
+                
+            elif self.position_y<=140 and newY>=140 and newX>=170 and newX<=330:
                 self.position_y=280-newY
                 self.bounce+=1
                 self.increment_y *= -1
+                
             elif newY > CANVAS_HEIGHT:
                 self.position_y = 2*CANVAS_HEIGHT - newY
                 self.bounce +=1
                 self.increment_y *= -1
+                
             elif newY < CANVAS_SCORE:
-                self.position_y = CANVAS_SCORE+15
+                self.position_y = 2*CANVAS_SCORE-newY+5
                 self.bounce +=1
                 self.increment_y *= -1
             else:
+                print("avanza",self.position_y,",la nueva",newY)
                 self.position_x = newX
                 self.position_y = newY
             return True
