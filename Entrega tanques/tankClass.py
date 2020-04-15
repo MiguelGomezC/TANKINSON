@@ -79,8 +79,7 @@ class TankClass:
         deviation_y = 3
         return BulletClass(self.team, self.position_x+canon_x+deviation_x, self.position_y-canon_y+deviation_y, self.pointer_x, self.pointer_y)
     
-    def move(self, movement): #canvas 500x300
-        mapa=1
+    def move(self, movement, mapa): #canvas 500x300
         if movement == 1:#arriba
             if mapa==1:
                 if self.position_y >= 210 and self.position_y-self.size_l<=210 and self.position_x+self.size_w>=170 and self.position_x-self.size_w<=330:
@@ -178,20 +177,17 @@ class BulletClass:
         self.increment_x = float(distance_x)/module*self.velocity
         self.increment_y = float(distance_y)/module*self.velocity
 
-    def move(self):
+    def move(self,mapa):
         """
         Output: Si se debe mantener la bala o no, es decir, si aún no ha chocado 2 veces.
         """
-        mapa=1
         newX = self.position_x + self.increment_x
         newY = self.position_y + self.increment_y
-        print("YLA DE DESPUES SUPONGO",self.position_x,"la nueva ",newX)
         if mapa == 1:
             if self.bounce==2:
                 return False
             elif ((self.position_x<=100 and newX>=100)or(self.position_x>100 and newX<=100)) and (newY<=120 or newY>=230):
                 self.bounce+=1
-                print("oieeeeeee que es",self.position_x," y la otra",newX)
                 self.position_x=200-newX
                 self.increment_x *= -1
             elif self.position_x<170 and newX>=170 and newY>=140 and newY<=230:
