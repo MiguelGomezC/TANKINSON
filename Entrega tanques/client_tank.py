@@ -18,7 +18,7 @@ CANVAS_SCORE = 50
 
 def draw_board(canvas, message):
     canvas.delete('all')
-    board, id = message
+    board, id, mapa = message
     board_tanks, board_bullets = board
     for key, tank in board_tanks:
         (x_tank, y_tank)  = tank.get_position()
@@ -171,12 +171,12 @@ def draw_board(canvas, message):
     #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
     
-    #Tablero1
-    canvas.create_line(100,50,100,120,fill="grey99")
-    canvas.create_line(400,50,400,120,fill="grey99")
-    canvas.create_line(100,230,100,300,fill="grey99")
-    canvas.create_line(400,230,400,300,fill="grey99")
-    canvas.create_rectangle(170,140,330,210,fill="grey99")
+    if mapa==1:
+        canvas.create_line(100,50,100,120,fill="grey99")
+        canvas.create_line(400,50,400,120,fill="grey99")
+        canvas.create_line(100,230,100,300,fill="grey99")
+        canvas.create_line(400,230,400,300,fill="grey99")
+        canvas.create_rectangle(170,140,330,210,fill="grey99")
     
 if __name__ == '__main__':    
 
