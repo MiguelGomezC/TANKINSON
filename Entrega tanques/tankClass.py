@@ -221,19 +221,19 @@ class TankClass:
                     self.position_x -= self.step
                     
             elif self.mapa == 2:
-                if self.position_x > 50 and self.position_x-self.size_l <= 50 and self.position_y+self.size_w >= 200 and self.position_y-self.size_w <=200:#raya izquierda
+                if self.position_x > 50 and self.position_x-self.size_l <= 50 and self.position_y+self.size_w >= 200 and self.position_y-self.size_w <=200:
                     self.poosition_x = 50 + self.size_l
-                elif self.position_x > 100 and self.position_x - self.size_l <= 100 and self.position_y+self.size_w >= 250:#rayaizquierda  derecha
+                elif self.position_x > 100 and self.position_x - self.size_l <= 100 and self.position_y+self.size_w >= 250:
                     self.position_x = 100 + self.size_l
-                elif self.position_x > 125 and self.position_x-self.size_l <= 125 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5: #raya centro izq
+                elif self.position_x > 125 and self.position_x-self.size_l <= 125 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5: 
                     self.position_x = 125+self.size_l
-                elif self.position_x > 250 and self.position_x-self.size_l <= 250 and self.position_y-self.size_w < 112.5 and self.position_y+self.size_w > 112.5:#raya centro arriba
+                elif self.position_x > 250 and self.position_x-self.size_l <= 250 and self.position_y-self.size_w < 112.5 and self.position_y+self.size_w > 112.5:
                     self.position_x = 250 + self.size_l
-                elif self.position_x > 250 and self.position_x-self.size_l <= 250 and self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5:#raya centro abajo
+                elif self.position_x > 250 and self.position_x-self.size_l <= 250 and self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5:
                     self.position_x = 250 + self.size_l 
-                elif self.position_x > 375 and self.position_x - self.size_l <= 375 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5:#raya centro derecha
+                elif self.position_x > 375 and self.position_x - self.size_l <= 375 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5:
                     self.position_x = 375 + self.size_l
-                elif self.position_x > 400 and self.position_x - self.size_l <= 400 and self.position_y-self.size_w < 100:#arriba
+                elif self.position_x > 400 and self.position_x - self.size_l <= 400 and self.position_y-self.size_w < 100:
                     self.position_x = 400+self.size_l
                 elif self.position_x-self.step < self.size_l:
                     self.position_x = self.size_l
