@@ -56,7 +56,7 @@ def clear_client(board, id):
 def update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa): #canvas size 500X250
     pointer_pos, movement, shoot = m
     tank = board_tanks[id[1]]
-    tank.move(movement, mapa)
+    tank.move(movement)
     tank.set_pointer(pointer_pos)
     semaphore_bullets.acquire()
     if shoot:
@@ -87,7 +87,7 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
             count.value -= 1
             semaphore_count.release()
             team = 0
-    tank = tankClass.TankClass(team, id[1])
+    tank = tankClass.TankClass(team, id[1], mapa)
     board_tanks[id[1]] = tank
     while True:
         try:
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     semaphore_bullets = Lock()
     count = Value('i',0)
     semaphore_count = Lock()
-    mapa=random.randint(1,1)
+    mapa=random.randint(1,2)
     
     mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, mapa))
     mb.start()
