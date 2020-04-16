@@ -17,6 +17,7 @@ class TankClass:
         self.size = 29.5 #1/2 largo
         self.id = id
         self.team = team
+        self.lives = 3
         if team == 1:
             self.position_x = 50
             self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
@@ -69,6 +70,12 @@ class TankClass:
             else:
                 self.pointer_orientation = 180 - pointer_degrees
         print(self.pointer_orientation)
+    
+    def tank_kill(self):
+        self.lives=self.lives-1
+    
+    def tank_death(self):
+        return self.lives<=0
     
     def shoot(self):
         pointer_radiants = math.radians(self.pointer_orientation)
@@ -257,7 +264,61 @@ class BulletClass:
                 self.position_x = newX
                 self.position_y = newY
             return True
-                    
+    
+        def impact(self, tank):
+        (x_tank, y_tank)  = tank.get_position()
+        t_orientation = (tank.get_tank_orientation())%360 
+        if t_orientation > 169:
+            if t_orientation > 259:
+                if t_orientation > 304:
+                    if t_orientation > 330.5:
+                        if t_orientation > 349:
+                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
+                        else:
+                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #6
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #7
+                else:
+                    if t_orientation > 281.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #8
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #9
+            else:
+                if t_orientation > 214:
+                    if t_orientation > 236:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #10
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #11
+                else:
+                    if t_orientation > 191.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #12
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #13
+            
+        else:
+            if t_orientation > 79:
+                if t_orientation > 124:
+                    if t_orientation > 146.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #14
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #15
+                else:
+                    if t_orientation > 101.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #16
+                    else:
+                       return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) 
+            else:
+                if t_orientation > 34:
+                    if t_orientation > 56.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #2
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #3
+                else:
+                    if t_orientation > 11.5:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #4
+                    else:
+                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
+                
         
     def get_position(self):
         return (int(self.position_x), int(self.position_y))
