@@ -82,9 +82,7 @@ class TankClass:
         length_canon = 20
         canon_x = length_canon*math.cos(pointer_radiants)
         canon_y = length_canon*math.sin(pointer_radiants)
-        deviation_x = 3
-        deviation_y = 3
-        return BulletClass(self.team, self.position_x+canon_x+deviation_x, self.position_y-canon_y+deviation_y, self.pointer_x, self.pointer_y)
+        return BulletClass(self.team, self.position_x+canon_x, self.position_y-canon_y, self.pointer_x, self.pointer_y)
     
     def move(self, movement, mapa): #canvas 500x300
         if movement == 1:#arriba
