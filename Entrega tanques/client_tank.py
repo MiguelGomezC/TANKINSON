@@ -194,6 +194,16 @@ def draw_board(canvas, message):
         canvas.create_line(100,230,100,300,fill="grey99")
         canvas.create_line(400,230,400,300,fill="grey99")
         canvas.create_rectangle(170,140,330,210,fill="grey99")
+    elif mapa == 2:
+        canvas.create_line(0,200,50,200,fill="grey99")
+        canvas.create_line(100,250,100,300,fill="grey99")
+        canvas.create_line(400,50,400,100,fill="grey99")
+        canvas.create_line(450,150,500,150,fill="grey99")
+        canvas.create_line(125,112.5,125,237.5,fill="grey99")
+        canvas.create_line(375,112.5,375,237.5,fill="grey99")
+        canvas.create_line(125,112.5,250,112.5,fill="grey99")
+        canvas.create_line(250,175,375,175,fill="grey99")
+        canvas.create_line(125,237.5,250,237.5,fill="grey99")
     
 if __name__ == '__main__':    
 
@@ -206,7 +216,7 @@ if __name__ == '__main__':
 
     canvas = Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="black") 
     canvas.pack()
-    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey50")#rectangulo gris para el marcador
+    canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey50")
     
     
     shoot = False
