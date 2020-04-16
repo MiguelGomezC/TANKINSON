@@ -140,9 +140,9 @@ def draw_board(canvas, message):
         x_bullet, y_bullet = bullet.get_position()
         b_team = bullet.get_team()
         if b_team == 0:
-            canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_blue_img, anchor=NW)
+            canvas.create_image(x_bullet-6, y_bullet-7, image=small_bullet_blue_img, anchor=NW)
         else:
-            canvas.create_image(x_bullet-11, y_bullet-11, image=small_bullet_red_img, anchor=NW)
+            canvas.create_image(x_bullet-6, y_bullet-7, image=small_bullet_red_img, anchor=NW)
     #Para crear el marcador,solo hay un rectangulo gris ahora mismo si va a grey99 ->negro y grey1->blanco y entre medias los demas tonos de gris
     canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey70")
     canvas.create_rectangle(10, 10, 150, 40, fill= "grey50")
