@@ -197,6 +197,26 @@ class TankClass:
                     self.position_y = CANVAS_HEIGHT-self.size_l
                 else:
                     self.position_y += self.step
+             
+            elif self.mapa == 2:
+                if self.position_y < 200 and self.position_y+self.size_l >= 200 and self.position_x-self.size_w < 50:#derecha
+                    self.position_y = 200-self.size_l
+                elif self.position_y < 250 and self.position_y+self.size_l >= 250 and self.position_x +self.size_w >=100 and self.position_x-self.size_w <=100:#raya cuadradoabajo dr
+                    self.position_y=250-self.size_l
+                elif self.position_y < 112.5 and self.position_y+self.size_l >= 112.5 and self.position_x+self.size_w > 125 and self.position_x-self.size_w < 250:#centro arriba
+                    self.position_y = 112.5-self.size_l
+                elif self.position_y < 175 and self.position_y+self.size_l >= 175 and self.position_x+self.size_w > 250 and self.position_x-self.size_w < 375:#raya central central
+                    self.position_y = 175 - self.size_l
+                elif self.position_y < 237.5 and self.position_y+self.size_l >= 237.5 and self.position_x-self.size_w < 250 and self.position_x+self.size_w > 125:#raya centro abajo
+                    self.position_y = 237.5-self.size_l
+                elif self.position_y < 150 and self.position_y+self.size_l >= 150 and self.position_x + self.size_w > 450:#raya derecha
+                    self.position_y = 150 - self.size_l
+                elif self.position_y < 112.5 and self.position_y+self.size_l >= 112.5 and self.position_x+self.size_w >= 375 and self.position_x-self.size_w < 375:#raya centro arriba derecha
+                    self.position_y = 112.5-self.size_l
+                elif self.position_y+self.step > CANVAS_HEIGHT-self.size_l:
+                    self.position_y = CANVAS_HEIGHT-self.size_l
+                else:
+                    self.position_y += self.step
                     
             if self.tank_orientation != 270:
                 if self.tank_orientation > 270:
