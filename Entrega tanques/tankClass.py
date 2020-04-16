@@ -263,7 +263,7 @@ class BulletClass:
                 self.position_y = newY
             return True
     
-        def impact(self, tank):
+    def impact(self, tank):
         (x_tank, y_tank)  = tank.get_position()
         t_orientation = (tank.get_tank_orientation())%360 
         if t_orientation > 169:
