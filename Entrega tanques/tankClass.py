@@ -34,7 +34,7 @@ class TankClass:
                 self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
                 self.tank_orientation = 180
                 self.pointer_orientation = 360
-       elif mapa == 2:
+        elif mapa == 2:
            if team == 1:
                 self.position_x = 50
                 self.position_y = 250
@@ -42,7 +42,7 @@ class TankClass:
                 self.pointer_y = 150
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
-            else:
+           else:
                 self.position_x = 450
                 self.position_y = 100
                 self.pointer_x = 250
