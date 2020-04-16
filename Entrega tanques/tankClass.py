@@ -14,7 +14,8 @@ CANVAS_SCORE = 50
 class TankClass:
     def __init__(self, team, id, mapa):
         self.step = 3
-        self.size = 29.5 #1/2 largo
+        self.size_l = 29.5 #1/2 largo
+        self.size_w = 15.5 #1/2 ancho
         self.id = id
         self.team = team
         self.mapa = mapa
