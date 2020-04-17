@@ -16,6 +16,8 @@ class TankClass:
         self.step = 3
         self.size_l = 29.5 #1/2 largo
         self.size_w = 15.5 #1/2 ancho
+        self.total_bullets = 3
+        self.bullets = self.total_bullets
         self.id = id
         self.team = team
         self.mapa = mapa
@@ -96,12 +98,16 @@ class TankClass:
     def tank_death(self):
         return self.lives<=0
     
+    def reload(self):
+        self.bullets = self.total_bullets
+    
     def shoot(self):
-        pointer_radiants = math.radians(self.pointer_orientation)
-        length_canon = 20
-        canon_x = length_canon*math.cos(pointer_radiants)
-        canon_y = length_canon*math.sin(pointer_radiants)
-        return BulletClass(self.team, self.position_x+canon_x, self.position_y-canon_y, self.pointer_x, self.pointer_y)
+        if self.bullets > 0:
+            self.bullets -= 1pointer_radiants = math.radians(self.pointer_orientation)
+            length_canon = 20
+            canon_x = length_canon*math.cos(pointer_radiants)
+            canon_y = length_canon*math.sin(pointer_radiants)
+            return BulletClass(self.team, self.position_x+canon_x, self.position_y-canon_y, self.pointer_x, self.pointer_y)
     
     def move(self, movement): #canvas 500x300
         if movement == 1:#arriba
