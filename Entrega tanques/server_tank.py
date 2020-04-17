@@ -71,17 +71,19 @@ def clear_client(board, id):
     board.pop(id[1])
 
 def update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa): #canvas size 500X250
-    pointer_pos, movement, shoot = m
-    tank = board_tanks[id[1]]
-    tank.move(movement)
-    tank.set_pointer(pointer_pos)
     semaphore_bullets.acquire()
+    semaphore_tanks.acquire()
+    tank = board_tanks[id[1]]
+    tank.move(movement, mapa)
+    tank.set_pointer(pointer_pos)
+    
     if shoot:
         bullet = tank.shoot()
         board_bullets.put(bullet)
     bullets_copy = queue_copy(board_bullets)
-    semaphore_bullets.release()
     board_tanks[id[1]] = tank
+    semaphore_tanks.release()
+    semaphore_bullets.release()
     return (board_tanks.items(), bullets_copy)
 
 def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa):
@@ -114,9 +116,11 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
             break
         print ('received message:', m, 'from', id[1])
         
-        semaphore_tanks.acquire()
+      
         board_elements = update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa)
-        semaphore_tanks.release()
+        if board_tanks[id[1]].tank_death():
+            break
+            
         answer = (board_elements, id[1], mapa)
 
         try:
