@@ -71,6 +71,7 @@ def clear_client(board, id):
     board.pop(id[1])
 
 def update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa): #canvas size 500X250
+    pointer_pos, movement, shoot = m
     semaphore_bullets.acquire()
     semaphore_tanks.acquire()
     tank = board_tanks[id[1]]
