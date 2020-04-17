@@ -70,7 +70,7 @@ def clear_client(board, id):
     print("board pop")
     board.pop(id[1])
 
-def update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa): #canvas size 500X250
+def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m, mapa): #canvas size 500X250
     pointer_pos, movement, shoot = m
     semaphore_bullets.acquire()
     semaphore_tanks.acquire()
@@ -118,7 +118,7 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
         print ('received message:', m, 'from', id[1])
         
       
-        board_elements = update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa)
+        board_elements = update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m, mapa)
         if board_tanks[id[1]].tank_death():
             if board_tanks[id[1]].get_team()==0:
                 semaphore_count.acquire()
