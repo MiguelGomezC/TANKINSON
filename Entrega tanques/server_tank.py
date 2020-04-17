@@ -183,7 +183,7 @@ if __name__ == '__main__':
     semaphore_count = Lock()
     mapa=random.randint(1,2)
     
-    mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, mapa))
+    mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa))
     mb.start()
 
     while True:
