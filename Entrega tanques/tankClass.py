@@ -103,7 +103,8 @@ class TankClass:
     
     def shoot(self):
         if self.bullets > 0:
-            self.bullets -= 1pointer_radiants = math.radians(self.pointer_orientation)
+            self.bullets -= 1
+            pointer_radiants = math.radians(self.pointer_orientation)
             length_canon = 20
             canon_x = length_canon*math.cos(pointer_radiants)
             canon_y = length_canon*math.sin(pointer_radiants)
