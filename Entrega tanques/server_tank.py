@@ -48,7 +48,7 @@ def move_bullets(board_bullets, semaphore_bullets, mapa):
                 board_bullets.put(bullet)
         semaphore_bullets.release()
         time.sleep(0.03)
-"""
+
 def move_bullets(board_bullets, semaphore_bullets, board_tanks, mapa):
     while True:#Hay que poner un lock para que no mire siempre, solo cuando haya balas
         #también habría que implementar choque con tanques
@@ -65,6 +65,29 @@ def move_bullets(board_bullets, semaphore_bullets, board_tanks, mapa):
                 board_bullets.put(bullet)
         semaphore_bullets.release()
         time.sleep(0.01)
+"""
+def move_bullets(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa):
+    while True:#Hay que poner un lock para que no mire siempre, solo cuando haya balas
+        #también habría que implementar choque con tanques
+        semaphore_bullets.acquire()
+        nBullets = board_bullets.qsize()
+        for i in range(nBullets):
+            bullet = board_bullets.get()
+            bullet_state = bullet.move(mapa)
+            collision=False
+            for key in board_tanks.keys():
+                tank=board_tanks[key]
+                collision=bullet.impact(tank) and bullet.get_team()!=tank.get_team()
+                if collision:
+                    semaphore_tanks.acquire()
+                    tank.tank_kill()
+                    board_tanks[key] = tank
+                    semaphore_tanks.release()
+                    break
+            if bullet_state and not collision:
+                board_bullets.put(bullet)
+        semaphore_bullets.release()
+        time.sleep(0.03)
 
 def clear_client(board, id):
     print("board pop")
