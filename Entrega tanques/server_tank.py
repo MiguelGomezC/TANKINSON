@@ -94,16 +94,18 @@ def clear_client(board, id):
     board.pop(id[1])
 
 def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m): #canvas size 500X250
-    pointer_pos, movement, shoot = m
+    pointer_pos, movement, shoot, reload = m
     semaphore_bullets.acquire()
     semaphore_tanks.acquire()
     tank = board_tanks[id[1]]
     tank.move(movement)
     tank.set_pointer(pointer_pos)
-    
     if shoot:
-        bullet = tank.shoot()
-        board_bullets.put(bullet)
+        if tank.has_bullets():#Patch
+            bullet = tank.shoot()
+            board_bullets.put(bullet)
+    elif reload:
+        tank.reload()
     bullets_copy = queue_copy(board_bullets)
     board_tanks[id[1]] = tank
     semaphore_tanks.release()
