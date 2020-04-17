@@ -219,7 +219,10 @@ if __name__ == '__main__':
     canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey50")
     
     
-    shoot = False
+    shoot = False #Si está disparando
+    shooted = False #Si ha disparado y no ha recargado
+    last_time_shooted = time.time() #Cuando ha disparado por última vez
+    reload = False #Si puede recargar
     pointer_x, pointer_y = 0,0
     movement = 0
     last_movement = 0
@@ -298,22 +301,40 @@ if __name__ == '__main__':
     print ('connection accepted')
 
     def normal_act():
-        global shoot
+        global shoot, shooted, last_time_shooted, reload
         global movement
+        if shoot:
+            last_time_shooted = time.time()
+            shooted = True
+        elif shooted:
+            current_time = time.time()
+            diff = current_time - last_time_shooted
+            if diff >= 3:
+                reload = True
+                shooted = False
         pointer_position = (pointer_x, pointer_y)
-        state = (pointer_position, movement, shoot)
+        state = (pointer_position, movement, shoot, reload)
         conn.send(state)
         message = conn.recv()
         shoot = False
         draw_board(canvas, message)
     
     def repet_act():
-        global shoot
+        global shoot, shooted, last_time_shooted, reload
         global movement
         key = movement
         for i in range(15):
+            if shoot:
+                last_time_shooted = time.time()
+                shooted = True
+            elif shooted:
+                current_time = time.time()
+                diff = current_time - last_time_shooted
+                if diff >= 3:
+                    reload = True
+                    shooted = False
             pointer_position = (pointer_x, pointer_y)
-            state = (pointer_position, key, shoot)
+            state = (pointer_position, key, shoot, reload)
             conn.send(state)
             shoot = False
             message = conn.recv()
