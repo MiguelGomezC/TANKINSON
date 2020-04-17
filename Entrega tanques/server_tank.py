@@ -119,6 +119,14 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
       
         board_elements = update_board(board_tanks, board_bullets, semaphore_bullets, id, m, mapa)
         if board_tanks[id[1]].tank_death():
+            if board_tanks[id[1]].get_team()==0:
+                semaphore_count.acquire()
+                count.value += 1
+                semaphore_count.release()
+            else:
+                semaphore_count.acquire()
+                count.value -= 1
+                semaphore_count.release()    
             break
             
         answer = (board_elements, id[1], mapa)
