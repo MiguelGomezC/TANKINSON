@@ -316,6 +316,7 @@ if __name__ == '__main__':
         state = (pointer_position, movement, shoot, reload)
         conn.send(state)
         message = conn.recv()
+        reload = False
         shoot = False
         draw_board(canvas, message)
     
@@ -336,6 +337,7 @@ if __name__ == '__main__':
             pointer_position = (pointer_x, pointer_y)
             state = (pointer_position, key, shoot, reload)
             conn.send(state)
+            reload = False
             shoot = False
             message = conn.recv()
             draw_board(canvas, message)
