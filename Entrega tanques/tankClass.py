@@ -101,6 +101,9 @@ class TankClass:
     def reload(self):
         self.bullets = self.total_bullets
     
+    def has_bullets(self):
+        return self.bullets > 0
+    
     def shoot(self):
         if self.bullets > 0:
             self.bullets -= 1
