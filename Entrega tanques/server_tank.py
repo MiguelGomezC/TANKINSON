@@ -35,7 +35,7 @@ def queue_copy(q):
         q.put(ele)
         p.append(ele)
     return p
-
+"""
 def move_bullets(board_bullets, semaphore_bullets, mapa):
     while True:#Hay que poner un lock para que no mire siempre, solo cuando haya balas
         #también habría que implementar choque con tanques
@@ -48,6 +48,23 @@ def move_bullets(board_bullets, semaphore_bullets, mapa):
                 board_bullets.put(bullet)
         semaphore_bullets.release()
         time.sleep(0.03)
+"""
+def move_bullets(board_bullets, semaphore_bullets, board_tanks, mapa):
+    while True:#Hay que poner un lock para que no mire siempre, solo cuando haya balas
+        #también habría que implementar choque con tanques
+        semaphore_bullets.acquire()
+        nBullets = board_bullets.qsize()
+        for i in range(nBullets):
+            bullet = board_bullets.get()
+            bullet_state = bullet.move(mapa)
+            collision = False
+            for tank in board_tanks.keys():
+                if bullet.close(board_tanks[tank]):
+                    collision = bullet.impact(board_tanks[tank])
+            if bullet_state and not collision:
+                board_bullets.put(bullet)
+        semaphore_bullets.release()
+        time.sleep(0.01)
 
 def clear_client(board, id):
     print("board pop")
@@ -130,7 +147,7 @@ if __name__ == '__main__':
     semaphore_count = Lock()
     mapa=random.randint(1,2)
     
-    mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, mapa))
+    mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, mapa))
     mb.start()
 
     while True:

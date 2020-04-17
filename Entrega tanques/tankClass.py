@@ -20,6 +20,7 @@ class TankClass:
         self.team = team
         self.mapa = mapa
         self.lives = 3
+        self.half_diagonal = .5*numpy.linalg.norm((31,59))
         if mapa == 1:
             if team == 1:
                 self.position_x = 50
@@ -534,60 +535,16 @@ class BulletClass:
                 self.position_y = newY
             return True
     
-    def impact(self, tank):
-        (x_tank, y_tank)  = tank.get_position()
-        t_orientation = (tank.get_tank_orientation())%360 
-        if t_orientation > 169:
-            if t_orientation > 259:
-                if t_orientation > 304:
-                    if t_orientation > 330.5:
-                        if t_orientation > 349:
-                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
-                        else:
-                            return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #6
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #7
-                else:
-                    if t_orientation > 281.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #8
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #9
-            else:
-                if t_orientation > 214:
-                    if t_orientation > 236:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #10
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #11
-                else:
-                    if t_orientation > 191.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #12
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #13
-            
-        else:
-            if t_orientation > 79:
-                if t_orientation > 124:
-                    if t_orientation > 146.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #14
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #15
-                else:
-                    if t_orientation > 101.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #16
-                    else:
-                       return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) 
-            else:
-                if t_orientation > 34:
-                    if t_orientation > 56.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #2
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #3
-                else:
-                    if t_orientation > 11.5:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #4
-                    else:
-                        return (x_tank-16<=self.position_x<=x_tank+16) and (y_tank-30<=self.position_y<=y_tank+30) #5
-                
+    def close(self, tank):
+        """
+        Output: Booleano que indica si la bala está cerca del tanque, si el tanque es de otro equipo
+        """
+        return self.get_team()!=tank.get_team() and tank.half_diagonal>numpy.linalg.norm((self.position_x-tank.position_x,self.position_y-tank.position_y))
+    def impact(self,tank):
+        angle = (-1)*tank.tank_orientation*2*math.pi/360
+        vector_translated = (self.position_x-tank.position_x, self.position_y-tank.position_y)
+        vector_rotated = (math.cos(angle) * vector_translated[0] - math.sin(angle) * vector_translated[1], math.sin(angle) * vector_translated[0] + math.cos(angle) * vector_translated[1])
+        return (abs(vector_rotated[0])<30 and abs(vector_rotated[1])<16)
         
     def get_position(self):
         return (int(self.position_x), int(self.position_y))
