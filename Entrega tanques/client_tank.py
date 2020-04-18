@@ -225,6 +225,7 @@ if __name__ == '__main__':
     root = Tk()
     root.title("MyTank")
     root.resizable(0, 0)
+    root.iconbitmap("tanque2.ico")
     
     frame = Frame(root)    
     frame.pack()
