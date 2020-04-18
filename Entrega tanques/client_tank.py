@@ -12,8 +12,8 @@ last_movement = 0
 
 #Constants inicialization
 
-CANVAS_WIDTH = 500
-CANVAS_HEIGHT = 300
+CANVAS_WIDTH = 1000
+CANVAS_HEIGHT = 600
 CANVAS_SCORE = 50
 
 def draw_board(canvas, message):
@@ -190,10 +190,25 @@ def draw_board(canvas, message):
     
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
+        canvas.create_line(100,255,100,395,fill="grey99")
+        canvas.create_line(100,530,100,600,fill="grey99")
         canvas.create_line(400,50,400,120,fill="grey99")
-        canvas.create_line(100,230,100,300,fill="grey99")
-        canvas.create_line(400,230,400,300,fill="grey99")
-        canvas.create_rectangle(170,140,330,210,fill="grey99")
+        canvas.create_line(400,255,400,395,fill="grey99")
+        canvas.create_line(400,530,400,600,fill="gray99")
+        canvas.create_line(600,50,600,120,fill="grey99")
+        canvas.create_line(600,255,600,395,fill="grey99")
+        canvas.create_line(600,530,600,600,fill="grey99")
+        canvas.create_line(900,50,900,120,fill="grey99")
+        canvas.create_line(900,255,900,395,fill="grey99")
+        canvas.create_line(900,530,900,600,fill="grey99")
+        canvas.create_line(0,325,400,325,fill="grey99")
+        canvas.create_line(600,325,1000,325,fill="grey99")
+        canvas.create_rectangle(170,140,330,235,fill="grey99")
+        canvas.create_rectangle(170,415,330,510,fill="grey99")
+        canvas.create_rectangle(670,140,830,235,fill="grey99")
+        canvas.create_rectangle(670,415,830,510,fill="grey99")
+        canvas.create_rectangle(475,271.25,525,353.75,fill="grey99")
+        
     elif mapa == 2:
         canvas.create_line(0,200,50,200,fill="grey99")
         canvas.create_line(100,250,100,300,fill="grey99")
