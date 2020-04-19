@@ -268,13 +268,54 @@ def draw_board(canvas, message):
     elif mapa == 2:
         canvas.create_line(0,200,50,200,fill="grey99")
         canvas.create_line(100,250,100,300,fill="grey99")
+        canvas.create_line(0,300,100,300,fill="grey99")
+        
+        canvas.create_line(125,112.5,125,237.5,fill="grey99")
+        canvas.create_line(125,112.5,250,112.5,fill="grey99")
+        canvas.create_line(125,237.5,250,237.5,fill="grey99")
+        
+        canvas.create_line(375,112.5,375,370,fill="grey99")
+        canvas.create_line(250,175,375,175,fill="grey99")
+        canvas.create_line(375,237.5,475,237.5,fill="grey99")
+        canvas.create_line(150,370,375,370,fill="grey99")
+        canvas.create_line(262.5,370,262.5,537.5,fill="grey99")
+        
+        canvas.create_line(0,370,75,370,fill="grey99")
+        
         canvas.create_line(400,50,400,100,fill="grey99")
         canvas.create_line(450,150,500,150,fill="grey99")
-        canvas.create_line(125,112.5,125,237.5,fill="grey99")
-        canvas.create_line(375,112.5,375,237.5,fill="grey99")
-        canvas.create_line(125,112.5,250,112.5,fill="grey99")
-        canvas.create_line(250,175,375,175,fill="grey99")
-        canvas.create_line(125,237.5,250,237.5,fill="grey99")
+        canvas.create_line(500,50,500,150,fill="grey99")
+        
+        
+        
+        canvas.create_line(0,500,50,500,fill="grey99")
+        canvas.create_line(100,550,100,600,fill="grey99")
+        
+        
+        canvas.create_line(950,150,1000,150,fill="grey99")
+        canvas.create_line(900,50,900,100,fill="grey99")
+        
+        canvas.create_line(737.5,112.5,737.5,280,fill="grey99")
+        canvas.create_line(625,280,850,280,fill="grey99")
+        canvas.create_line(625,280,625,537.5,fill="grey99")
+        canvas.create_line(625,475,750,475,fill="grey99")
+        canvas.create_line(525,412.5,625,412.5,fil="grey99")
+        
+        canvas.create_line(925,280,1000,280,fill="grey99")
+        
+        canvas.create_line(600,550,600,600,fill="grey99")
+        canvas.create_line(500,500,500,600,fill="grey99")
+        canvas.create_line(500,500,550,500,fill="grey99")
+        
+    
+        canvas.create_line(950,450,1000,450,fill="grey99")
+        canvas.create_line(900,350,1000,350,fill="grey99")
+        canvas.create_line(900,350,900,400,fill="grey99")
+        
+        
+        canvas.create_line(750,537.5,875,537.5,fill="grey99")
+        canvas.create_line(875,412,875,537.5,fill="grey99")
+        canvas.create_line(750,412,875,412,fill="grey99")
     
 if __name__ == '__main__':    
 
