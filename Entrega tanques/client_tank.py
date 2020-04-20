@@ -76,10 +76,14 @@ def draw_board(canvas, message):
     canvas.delete('all')
     board, id, mapa = message
     board_tanks, board_bullets = board
+    team_lives=[0,0]
     for key, tank in board_tanks:
         (x_tank, y_tank)  = tank.get_position()
         t_team = tank.get_team()
-        t_orientation = tank.get_tank_orientation()
+        if t_team==0:
+            team_lives[0]+=1
+        else:
+            team_lives[1]+=1
         
         #Mira como está orientado el tanque y elige la foto correspondiente
         if t_orientation > 169:
@@ -205,27 +209,61 @@ def draw_board(canvas, message):
     canvas.create_rectangle(340, 10, 490, 40, fill= "grey50")
     canvas.create_text(50, 25, text="Equipo 1", fill="black", font=("Arial", 15))
     canvas.create_text(380, 25, text="Equipo 2", fill="black", font=("Arial", 15))
-    #ESTRELLAS GRISES (EQUIPO 1)
     
+    #ESTRELLAS GRISES (EQUIPO 1)
     #canvas.create_image(95,20,image = estrella_gris, anchor= NW)
     #canvas.create_image(110,20,image = estrella_gris, anchor= NW)
-    canvas.create_image(125,20,image = estrella_gris, anchor= NW)
+    #canvas.create_image(125,20,image = estrella_gris, anchor= NW)
     
     #ESTRELLAS AMARILLAS (EQUIPO 1)
-    canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
-    canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(125,20,image = estrella_amarilla, anchor= NW)
 
     #ESTRELLAS GRISES (EQUIPO 2)
-    
     #canvas.create_image(425,20,image = estrella_gris, anchor= NW)
-    canvas.create_image(440,20,image = estrella_gris, anchor= NW)
-    canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+    #canvas.create_image(440,20,image = estrella_gris, anchor= NW)
+    #canvas.create_image(455,20,image = estrella_gris, anchor= NW)
     
     #ESTRELLAS AMARILLAS (EQUIPO 2)
-    canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
+    #canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
     #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
+    
+    if team_lives[0]==0:
+        canvas.create_image(95,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(110,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(125,20,image = estrella_gris, anchor= NW)
+    elif team_lives[0]==1:
+        canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(110,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(125,20,image = estrella_gris, anchor= NW)
+    elif team_lives[0]==2:
+        canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(125,20,image = estrella_gris, anchor= NW)
+    else:
+        canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(125,20,image = estrella_amarilla, anchor= NW)
+        
+        
+    if team_lives[1]==0:
+        canvas.create_image(425,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(440,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+    elif team_lives[1]==1:
+        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(440,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+    elif team_lives[1]==2:
+        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+    else:
+        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
     
     #Has perdido
     """
