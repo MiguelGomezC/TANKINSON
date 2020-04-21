@@ -470,8 +470,14 @@ if __name__ == '__main__':
                 shooted = False
         pointer_position = (pointer_x, pointer_y)
         state = (pointer_position, movement, shoot, reload)
-        conn.send(state)
-        message = conn.recv()
+        try:
+            conn.send(state)
+        except IOError:
+            message = (([], []), 0, -1)
+        try:
+            message = conn.recv()
+        except EOFError:
+            message = (([], []), 0, -1)
         reload = False
         shoot = False
         draw_board(canvas, message)
@@ -492,10 +498,16 @@ if __name__ == '__main__':
                     shooted = False
             pointer_position = (pointer_x, pointer_y)
             state = (pointer_position, key, shoot, reload)
-            conn.send(state)
+            try:
+                conn.send(state)
+            except IOError:
+                message = (([], []), 0, -1)
+            try:
+                message = conn.recv()
+            except EOFError:
+                message = (([], []), 0, -1)
             reload = False
             shoot = False
-            message = conn.recv()
             draw_board(canvas, message)
             root.update()
             time.sleep(0.03)
