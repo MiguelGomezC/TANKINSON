@@ -12,7 +12,7 @@ CANVAS_HEIGHT = 600
 CANVAS_SCORE = 50
 
 class TankClass:
-    def __init__(self, team, id, mapa):
+    def __init__(self, team, id, mapa, ini):
         self.step = 3
         self.size_l = 29.5 #1/2 largo
         self.size_w = 15.5 #1/2 ancho
@@ -24,29 +24,57 @@ class TankClass:
         self.lives = 3
         self.half_diagonal = .5*numpy.linalg.norm((31,59))
         if mapa == 1:
-            if team == 1:
+            if ini == 1:
                 self.position_x = 50
-                self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
+                self.position_y =175
                 self.pointer_x = 250
-                self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
+                self.pointer_y = 175
                 self.tank_orientation = 360
                 self.pointer_orientation = 180
-            else:
-                self.position_x = 450
-                self.position_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
+            elif ini == 2:
+                self.position_x = 950
+                self.position_y = 475
                 self.pointer_x = 250
-                self.pointer_y = (CANVAS_HEIGHT+CANVAS_SCORE)/2
+                self.pointer_y = 475
                 self.tank_orientation = 180
                 self.pointer_orientation = 360
+            elif ini == 3:
+                self.position_x = 50
+                self.position_y =475
+                self.pointer_x = 250
+                self.pointer_y = 475
+                self.tank_orientation = 360
+                self.pointer_orientation = 180
+            elif ini == 4:
+                self.position_x = 950
+                self.position_y = 175
+                self.pointer_x = 250
+                self.pointer_y = 175
+                self.tank_orientation = 180
+                self.pointer_orientation = 360
+            elif ini == 5:
+                self.position_x = 500
+                self.position_y = 125
+                self.pointer_x = 250
+                self.pointer_y = 175
+                self.tank_orientation = 270
+                self.pointer_orientation = 90
+            elif ini == 6:
+                self.position_x = 500
+                self.position_y = 525
+                self.pointer_x = 250
+                self.pointer_y = 525
+                self.tank_orientation = 90
+                self.pointer_orientation = 270
         elif mapa == 2:
-           if team == 0:
+           if inicio == 1:
                 self.position_x = 50
                 self.position_y = 250
                 self.pointer_x = 250
                 self.pointer_y = 150
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
-           elif team== 1:
+           elif inicio == 2:
                 self.position_x = 450
                 self.position_y = 100
                 self.pointer_x = 250
@@ -54,7 +82,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif team == 2:
+           elif inicio == 3:
                 self.position_x = 550
                 self.position_y = 550
                 self.pointer_x = 250
@@ -62,7 +90,7 @@ class TankClass:
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
                 
-           elif team== 3:
+           elif inicio == 4:
                 self.position_x = 950
                 self.position_y = 100
                 self.pointer_x = 250
@@ -70,7 +98,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif team == 4:
+           elif inicio == 5:
                 self.position_x = 50
                 self.position_y = 550
                 self.pointer_x = 250
@@ -193,9 +221,55 @@ class TankClass:
                             self.tank_orientation += 7.5
                    
             elif self.mapa == 2:
-                if self.tank_orientation == 270 and self.position_x - self.size_l < 50 and self.position_x > 50 and self.position_y + self.size_l > 200 and self.position_y -  self.size_l < 200:
+                elif self.mapa == 2:
+                if self.tank_orientation == 270 and self.position_x - self.size_l < 50 and self.position_x > 50 and self.position_y+self.size_l >200 and self.position_y < 300:
                     self.position_y -= self.step
-                elif self.tank_orientation == 270 and self.position_x - self.size_l < 250 and self.position_x > 250 and self.position_y +self.size_l > 112.5 and self.position_y -  self.size_l < 112.5:
+                elif self.tank_orientation == 270 and self.position_x - self.size_l < 250 and self.position_x > 250 and ((self.position_y +self.size_l > 112.5 and self.position_y  < 175) or (self.position_y +self.size_l > 237.5 and self.position_y+self.size_l  <= 330)):
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x - self.size_l < 70 and self.position_x > 70 and self.position_y +self.size_l > 370 and self.position_y+self.size_l  <= 462.5 :
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x - self.size_l < 50 and self.position_x > 50) or (self.position_x - self.size_l < 500 and self.position_x > 500)) and self.position_y +self.size_l > 500 and self.position_y+self.size_l  <= 600:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x - self.size_l < 475 and self.position_x > 475 and self.position_y +self.size_l > 237.5 and self.position_y+self.size_l  <= 271 :
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x - self.size_l < 850 and self.position_x > 850 and self.position_y +self.size_l > 280 and self.position_y+self.size_l  <= 372.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x - self.size_l < 750 and self.position_x > 750 and self.position_y +self.size_l > 475 and self.position_y+self.size_l  <= 537.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 250 and self.position_x < 250 and self.position_y +self.size_l > 175 and self.position_y+self.size_l  <= 237.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 150 and self.position_x < 150 and self.position_y +self.size_l > 370 and self.position_y+self.size_l  <= 462.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 525 and self.position_x < 525 and self.position_y +self.size_l > 412.5 and self.position_y+self.size_l  <= 505:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 450 and self.position_x < 450) or (self.position_x + self.size_l > 950 and self.position_x < 950)) and self.position_y +self.size_l > 150 and self.position_y+self.size_l  <= 242.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 925 and self.position_x < 925 and self.position_y +self.size_l > 280 and self.position_y+self.size_l  <= 372.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 950 and self.position_x < 950 and self.position_y +self.size_l > 450 and self.position_y+self.size_l  <= 542.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and self.position_x + self.size_l > 750 and self.position_x < 750 and ((self.position_y +self.size_l > 412 and self.position_y+self.size_l  <= 475) or (self.position_y +self.size_l > 537.5 and self.position_y+self.size_l  <= 600)):
+                    self.position_y -= self.step
+                ##
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 125 and self.position_x < 125) or (self.position_x > 125 and self.position_x - self.size_l< 125)) and self.position_y > 112.5 and self.position_y+self.size_l  <= 237.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 375 and self.position_x < 375) or (self.position_x  > 375 and self.position_x - self.size_l< 375)) and ((self.position_y  > 112.5 and self.position_y + self.size_l  < 175) or (self.position_y - self.size_l  > 175 and self.position_y + self.size_l  < 370)):
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 262.5 and self.position_x < 262.5) or (self.position_x>262.5 and self.position_x - self.size_l< 262.5)) and self.position_y - self.size_l  > 370 and self.position_y < 537.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 625 and self.position_x < 625) or (self.position_x > 625 and self.position_x - self.size_l< 625)) and ((self.position_y  > 280 and self.position_y + self.size_l  < 412.5) or (self.position_y - self.size_l  > 412.5 and self.position_y + self.size_l  < 537.5)):
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 737.5 and self.position_x < 737.5) or (self.position_x >737.5 and self.position_x - self.size_l< 737.5)) and self.position_y  > 112.5 and self.position_y + self.size_l < 280:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 875 and self.position_x < 875) or (self.position_x  > 875 and self.position_x - self.size_l< 875)) and self.position_y - self.size_l > 412 and self.position_y+self.size_l  <= 537.5:
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 100 and self.position_x < 100) or (self.position_x  > 100 and self.position_x - self.size_l< 100)) and ((self.position_y > 250  and self.position_y+self.size_l  < 300) or (self.position_y > 550  and self.position_y+self.size_l  < 600)):
+                    self.position_y -= self.step   
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 500 and self.position_x < 500) or (self.position_x > 500 and self.position_x - self.size_l< 500)) and ((self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 150) or (self.position_y-self.size_l > 500  and self.position_y+self.size_l  < 600)):
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 900 and self.position_x < 900) or (self.position_x  > 900 and self.position_x - self.size_l< 900)) and ((self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 100) or (self.position_y-self.size_l > 350  and self.position_y+self.size_l  < 400)):
+                    self.position_y -= self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 400 and self.position_x < 400) or (self.position_x  > 400 and self.position_x - self.size_l< 400)) and self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 100:
                     self.position_y -= self.step
                 else:
                     if self.position_y >= 200 and self.position_y-self.size_l <= 200 and self.position_x-self.size_w < 50:
@@ -290,54 +364,94 @@ class TankClass:
                             self.tank_orientation -= 7.5
                     
             elif self.mapa == 2:
-                if self.position_x < 100 and self.position_x+self.size_l >= 100 and ((self.position_y+self.size_w > 250 and self.position_y - self.size_w <= 300) or (self.position_y+self.size_w > 550 and self.position_y - self.size_w <= 600)):
-                    self.position_x = 100-self.size_l
-                elif self.position_x < 125 and self.position_x+self.size_l >= 125 and self.position_y+self.size_w > 112.5 and self.position_y-self.size_w < 237.5:
-                    self.position_x = 125-self.size_l
-                elif self.position_x < 375 and self.position_x+self.size_l >= 375 and self.position_y+self.size_w > 112.5 and self.position_y-self.size_w < 370:
-                    self.position_x = 375 -self.size_l
-                elif self.position_x < 250 and self.position_x+self.size_l >= 250 and self.position_y+self.size_w >= 175 and self.position_y-self.size_w < 175:
-                    self.posiiton_x = 250-self.size_l
-                elif self.position_x < 400 and self.position_x+self.size_l >= 400 and self.position_y-self.size_w <= 100 and self.position_y+self.size_w >= 0:
-                    self.position_x = 400-self.size_l
-                elif self.position_x < 450 and self.position_x+self.size_l >= 450 and self.position_y-self.size_w <= 150 and self.position_y+self.size_w >= 150:
-                    self.position_x = 450-self.size_l
-                elif self.position_x < 150 and self.position_y + self.size_l >= 150 and self.position_y-self.size_w < 370 and self.position_y+self.size_w > 370:
-                    self.position_x = 150 - self.size_l
-                elif self.position_x < 262.5 and self.position_x + self.size_l >= 262.5 and self.position_y - self.size_w < 537.5 and self.position_y + self.size_w > 370:
-                    self.position_x = 262.5 - self.size_l
-                elif self.position_x < 500 and self.position_x + self.size_l >= 500 and ((self.position_y+self.size_w >500) or (self.position_y - self.size_w <= 150 and self.position_y + self.size_w >= 50)):
-                    self.position_x = 500 - self.size_l
-                elif self.position_x < 525 and self.position_x + self.size_l >= 525 and self.position_y - self.size_w <= 412.5 and self.position_y + self.size_w >= 412.5:
-                    self.position_x = 525 - self.size_l
-                elif self.position_x < 625 and self.position_x + self.size_l >= 625 and self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 280:
-                    self.position_x = 625 - self.size_l
-                elif self.position_x < 737.5 and self.position_x + self.size_l >= 737.5 and self.position_y - self.size_w <= 280 and self.position_y + self.size_w >= 112.5:
-                    self.position_x = 737.5 - self.size_l
-                elif self.position_x < 900 and self.position_x + self.size_l >= 900 and ((self.position_y - self.size_w <= 100 and self.position_y + self.size_w >= 50) or (self.position_y - self.size_w <= 400 and self.position_y + self.size_w >= 350)):
-                    self.position_x = 900 - self.size_l
-                elif self.position_x < 950 and self.position_x + self.size_l >= 950 and ((self.position_y - self.size_w <= 150 and self.position_y + self.size_w >= 150) or (self.position_y - self.size_w <= 450 and self.position_y + self.size_w >= 450)):
-                    self.position_x = 950 - self.size_l
-                elif self.position_x < 925 and self.position_x + self.size_l >= 925 and self.position_y - self.size_w <= 280 and self.position_y + self.size_w >= 280:
-                    self.position_x = 925 - self.size_l
-                elif self.position_x < 750 and self.position_x + self.size_l >= 750 and ((self.position_y - self.size_w <= 412 and self.position_y + self.size_w >= 412) or (self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 537.5)):
-                    self.position_x = 750 - self.size_l
-                elif self.position_x < 875 and self.position_x + self.size_l >= 875 and self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 412:
-                    self.position_x = 875 - self.size_l
-                elif self.position_x < 600 and self.position_x + self.size_l >= 600 and self.position_y - self.size_w <= 600 and self.position_y + self.size_w >= 550:
-                    self.position_x = 600 - self.size_l
-                elif self.position_x+self.step> CANVAS_WIDTH-self.size_l:
-                    self.position_x = CANVAS_WIDTH-self.size_l
-                else:
+                if self.tank_orientation == 180 and ((self.position_y <= 112.5 and self.position_y + self.size_l >= 112.5) or (self.position_y >= 112.5 and self.position_y - self.size_l <= 112.5)) and self.position_x - self.size_l <= 250 and self.position_x + self.size_l >= 125:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 175 and self.position_y + self.size_l >= 175) or (self.position_y >= 175 and self.position_y - self.size_l <= 175)) and self.position_x + self.size_l >= 250 and self.position_x + self.size_l <= 375:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 237.5 and self.position_y + self.size_l >= 237.5) or (self.position_y >= 237.5 and self.position_y - self.size_l <= 237.5)) and ((self.position_x - self.size_l <= 250 and self.position_x >= 125) or (self.position_x - self.size_l <= 475 and self.position_x - self.size_l >= 375)):
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 200 and self.position_y + self.size_l >= 200) or (self.position_y >= 200 and self.position_y - self.size_l <= 200)) and self.position_x - self.size_l <= 50 and self.position_x >= 0:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 300 and self.position_y + self.size_l >= 300) or (self.position_y >= 300 and self.position_y - self.size_l <= 300)) and self.position_x - self.size_l <= 100 and self.position_x >= 0:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 370 and self.position_y + self.size_l >= 370) or (self.position_y >= 370 and self.position_y - self.size_l <= 370)) and ((self.position_x - self.size_l <= 70 and self.position_x >= 0) or (self.position_x + self.size_l <= 375 and self.position_x >=150)):
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 500 and self.position_y + self.size_l >= 500) or (self.position_y >= 500 and self.position_y - self.size_l <= 500)) and ((self.position_x - self.size_l <= 50 and self.position_x >= 0) or (self.position_x - self.size_l <= 550 and self.position_x >= 500)) :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and self.position_y <= 550 and self.position_y + self.size_l >= 550 and self.position_x - self.size_l <= 100 and self.position_x + self.size_l >= 100 :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and self.position_y >= 237.5 and self.position_y - self.size_l <= 237 and self.position_x - self.size_l <= 475 and self.position_x + self.size_l >= 375 :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 412.5 and self.position_y + self.size_l >= 412.5) or (self.position_y >= 412.5 and self.position_y - self.size_l <= 412.5)) and self.position_x + self.size_l <= 625 and self.position_x > 525 :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 150 and self.position_y + self.size_l >= 150) or (self.position_y >= 150 and self.position_y - self.size_l <= 150)) and ((self.position_x + self.size_l <= 500 and self.position_x + self.size_l >= 450) or (self.position_x <= 1000 and self.position_x + self.size_l >= 950)) :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and self.position_y >= 100 and self.position_y - self.size_l <= 100 and ((self.position_x - self.size_l <= 400 and self.position_x>= 400) or (self.position_x - self.size_l <= 900 and self.position_x + self.size_l >= 900)) :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 280 and self.position_y + self.size_l >= 280) or (self.position_y >= 280 and self.position_y - self.size_l <= 280)) and ((self.position_x - self.size_l <= 850 and self.position_x - self.size_l >= 737.5) or (self.position_x  <= 1000 and self.position_x >= 925) or (self.position_x + self.size_l <= 737.5 and self.position_x + self.size_l >= 625)) :
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 350 and self.position_y + self.size_l >= 350) or (self.position_y >= 350 and self.position_y - self.size_l <= 350)) and self.position_x - self.size_l <= 1000 and self.position_x >= 900:
+                    self.position_x += self.step 
+                elif self.tank_orientation == 180 and ((self.position_y <= 450 and self.position_y + self.size_l >= 450) or (self.position_y >= 450 and self.position_y - self.size_l <= 450)) and self.position_x - self.size_l <= 1000 and self.position_x >= 950:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and self.position_y >= 400 and self.position_y - self.size_l <= 400 and self.position_x - self.size_l <= 900 and self.position_x >= 900:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 412 and self.position_y + self.size_l >= 412) or (self.position_y >= 412 and self.position_y - self.size_l <= 412)) and self.position_x - self.size_l <= 875 and self.position_x +self.size_l >= 750:
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 537.5 and self.position_y + self.size_l >= 527.5) or (self.position_y >= 537.5 and self.position_y - self.size_l <= 537.5)) and ((self.position_x - self.size_l <= 875 and self.position_x + self.size_l >= 750) or (self.position_x - self.size_l <= 262.5 and self.position_x - self.size_l >= 262.5)):
+                    self.position_x += self.step
+                elif self.tank_orientation == 180 and ((self.position_y <= 475 and self.position_y + self.size_l >= 475) or (self.position_y >= 475 and self.position_y - self.size_l <= 475)) and self.position_x - self.size_l <= 750 and self.position_x - self.size_l >= 625 :
                     self.position_x += self.step
                     
-            if self.tank_orientation != 360:
-                if self.tank_orientation >= 180:
-                    self.tank_orientation += 7.5
-                elif self.tank_orientation <= 7.5:
-                    self.tank_orientation = 360
                 else:
-                    self.tank_orientation -= 7.5
+                    if self.position_x < 100 and self.position_x+self.size_l >= 100 and ((self.position_y+self.size_w > 250 and self.position_y - self.size_w <= 300) or (self.position_y+self.size_w > 550 and self.position_y - self.size_w <= 600)):
+                        self.position_x = 100-self.size_l
+                    elif self.position_x < 125 and self.position_x+self.size_l >= 125 and self.position_y+self.size_w > 112.5 and self.position_y-self.size_w < 237.5:
+                        self.position_x = 125-self.size_l
+                    elif self.position_x < 375 and self.position_x+self.size_l >= 375 and self.position_y+self.size_w > 112.5 and self.position_y-self.size_w < 370:
+                        self.position_x = 375 -self.size_l
+                    elif self.position_x < 250 and self.position_x+self.size_l >= 250 and self.position_y+self.size_w >= 175 and self.position_y-self.size_w < 175:
+                        self.posiiton_x = 250-self.size_l
+                    elif self.position_x < 400 and self.position_x+self.size_l >= 400 and self.position_y-self.size_w <= 100 and self.position_y+self.size_w >= 0:
+                        self.position_x = 400-self.size_l
+                    elif self.position_x < 450 and self.position_x+self.size_l >= 450 and self.position_y-self.size_w <= 150 and self.position_y+self.size_w >= 150:
+                        self.position_x = 450-self.size_l
+                    elif self.position_x < 150 and self.position_y + self.size_l >= 150 and self.position_y-self.size_w < 370 and self.position_y+self.size_w > 370:
+                        self.position_x = 150 - self.size_l
+                    elif self.position_x < 262.5 and self.position_x + self.size_l >= 262.5 and self.position_y - self.size_w < 537.5 and self.position_y + self.size_w > 370:
+                        self.position_x = 262.5 - self.size_l
+                    elif self.position_x < 500 and self.position_x + self.size_l >= 500 and ((self.position_y+self.size_w >500) or (self.position_y - self.size_w <= 150 and self.position_y + self.size_w >= 50)):
+                        self.position_x = 500 - self.size_l
+                    elif self.position_x < 525 and self.position_x + self.size_l >= 525 and self.position_y - self.size_w <= 412.5 and self.position_y + self.size_w >= 412.5:
+                        self.position_x = 525 - self.size_l
+                    elif self.position_x < 625 and self.position_x + self.size_l >= 625 and self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 280:
+                        self.position_x = 625 - self.size_l
+                    elif self.position_x < 737.5 and self.position_x + self.size_l >= 737.5 and self.position_y - self.size_w <= 280 and self.position_y + self.size_w >= 112.5:
+                        self.position_x = 737.5 - self.size_l
+                    elif self.position_x < 900 and self.position_x + self.size_l >= 900 and ((self.position_y - self.size_w <= 100 and self.position_y + self.size_w >= 50) or (self.position_y - self.size_w <= 400 and self.position_y + self.size_w >= 350)):
+                        self.position_x = 900 - self.size_l
+                    elif self.position_x < 950 and self.position_x + self.size_l >= 950 and ((self.position_y - self.size_w <= 150 and self.position_y + self.size_w >= 150) or (self.position_y - self.size_w <= 450 and self.position_y + self.size_w >= 450)):
+                        self.position_x = 950 - self.size_l
+                    elif self.position_x < 925 and self.position_x + self.size_l >= 925 and self.position_y - self.size_w <= 280 and self.position_y + self.size_w >= 280:
+                        self.position_x = 925 - self.size_l
+                    elif self.position_x < 750 and self.position_x + self.size_l >= 750 and ((self.position_y - self.size_w <= 412 and self.position_y + self.size_w >= 412) or (self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 537.5)):
+                        self.position_x = 750 - self.size_l
+                    elif self.position_x < 875 and self.position_x + self.size_l >= 875 and self.position_y - self.size_w <= 537.5 and self.position_y + self.size_w >= 412:
+                        self.position_x = 875 - self.size_l
+                    elif self.position_x < 600 and self.position_x + self.size_l >= 600 and self.position_y - self.size_w <= 600 and self.position_y + self.size_w >= 550:
+                        self.position_x = 600 - self.size_l
+                    elif self.position_x+self.step> CANVAS_WIDTH-self.size_l:
+                        self.position_x = CANVAS_WIDTH-self.size_l
+                    else:
+                        self.position_x += self.step
+                    
+                    if self.tank_orientation != 360:
+                        if self.tank_orientation >= 180:
+                            self.tank_orientation += 7.5
+                        elif self.tank_orientation <= 7.5:
+                            self.tank_orientation = 360
+                        else:
+                            self.tank_orientation -= 7.5
                  
         elif movement == 3:#abajo
             if self.mapa == 1:
@@ -386,52 +500,103 @@ class TankClass:
                             self.tank_orientation -= 7.5
             
             elif self.mapa == 2:
-                if self.position_y < 200 and self.position_y+self.size_l >= 200 and self.position_x-self.size_w < 50:#derecha
-                    self.position_y = 200-self.size_l
-                elif self.position_y < 250 and self.position_y+self.size_l >= 250 and self.position_x +self.size_w >=100 and self.position_x-self.size_w <=100:#raya cuadradoabajo dr
-                    self.position_y=250-self.size_l
-                elif self.position_y < 112.5 and self.position_y+self.size_l >= 112.5 and ((self.position_x+self.size_w > 125 and self.position_x-self.size_w < 250) or (self.position_x+self.size_w >= 375 and self.position_x-self.size_w < 375) or (self.position_x+self.size_w >= 737.5 and self.position_x-self.size_w < 737.5)):
-                    self.position_y = 112.5-self.size_l
-                elif self.position_y < 175 and self.position_y+self.size_l >= 175 and self.position_x+self.size_w > 250 and self.position_x-self.size_w < 375:#raya central central
-                    self.position_y = 175 - self.size_l
-                elif self.position_y < 237.5 and self.position_y+self.size_l >= 237.5 and ((self.position_x-self.size_w < 250 and self.position_x+self.size_w > 125) or (self.position_x+self.size_w >= 375 and self.position_x-self.size_w < 475)):
-                    self.position_y = 237.5-self.size_l
-                elif self.position_y < 150 and self.position_y+self.size_l >= 150 and ((self.position_x + self.size_w > 450 and self.position_x - self.size_w <= 500)or (self.position_x + self.size_w > 950 and self.position_x - self.size_w <= 1000)):
-                    self.position_y = 150 - self.size_l
-                elif self.position_y < 370 and self.position_y + self.size_l >= 370 and ((self.position_x + self.size_w > 0 and self.position_x - self.size_w <= 70) or (self.position_x + self.size_w > 150 and self.position_x - self.size_w <= 375)):
-                    self.position_y = 370 - self.size_l
-                elif self.position_y < 500 and self.position_y + self.size_l >= 500 and ((self.position_x + self.size_w > 0 and self.position_x - self.size_w <= 50) or (self.position_x + self.size_w > 500 and self.position_x - self.size_w <= 550)):
-                    self.position_y = 500 - self.size_l
-                elif self.position_y < 412.5 and self.position_y + self.size_l >= 412.5 and ((self.position_x + self.size_w > 525 and self.position_x - self.size_w <= 625) or (self.position_x + self.size_w > 750 and self.position_x - self.size_w <= 875)):
-                    self.position_y = 412.5 - self.size_l
-                elif self.position_y < 280 and self.position_y + self.size_l >= 280 and ((self.position_x + self.size_w > 625 and self.position_x - self.size_w <= 850) or (self.position_x + self.size_w > 925 and self.position_x - self.size_w <= 1000)):
-                    self.position_y = 280 - self.size_l
-                elif self.position_y < 550 and self.position_y + self.size_l >= 550 and ((self.position_x + self.size_w > 100 and self.position_x - self.size_w <= 100) or (self.position_x + self.size_w > 600 and self.position_x - self.size_w <= 600)):
-                    self.position_y = 550 - self.size_l
-                elif self.position_y < 350 and self.position_y + self.size_l >= 350 and self.position_x + self.size_w > 900 and self.position_x - self.size_w <= 1000:
-                    self.position_y = 350 - self.size_l
-                elif self.position_y < 450 and self.position_y + self.size_l >= 450 and self.position_x + self.size_w > 950 and self.position_x - self.size_w <= 1000:
-                    self.position_y = 450 - self.size_l
-                elif self.position_y < 475 and self.position_y + self.size_l >= 475 and self.position_x + self.size_w > 625 and self.position_x - self.size_w <= 750:
-                    self.position_y = 475 - self.size_l
-                elif self.position_y < 537.5 and self.position_y + self.size_l >= 537.5 and self.position_x + self.size_w > 750 and self.position_x - self.size_w <= 875:
-                    self.position_y = 537.5 - self.size_l
-                elif self.position_y < 300 and self.position_y + self.size_l >= 300 and  self.position_x - self.size_w <= 100:
-                    self.position_y = 300 - self.size_l
-                elif self.position_y+self.step > CANVAS_HEIGHT-self.size_l:
-                    self.position_y = CANVAS_HEIGHT-self.size_l
-                else:
+                if self.tank_orientation == 90 and self.position_x - self.size_l < 50 and self.position_x > 50 and self.position_y > 137 and self.position_y < 300:
                     self.position_y += self.step
-                   
-            if self.tank_orientation != 270:
-                if self.tank_orientation > 270:
-                    self.tank_orientation -= 7.5
-                elif self.tank_orientation >= 90:
-                    self.tank_orientation += 7.5
-                elif self.tank_orientation <= 7.5:
-                    self.tank_orientation = 360
+                elif self.tank_orientation == 90 and self.position_x - self.size_l < 250 and self.position_x > 250 and ((self.position_y  > 50 and self.position_y - self.size_l < 112.5) or (self.position_y  > 175 and self.position_y - self.size_l  < 237.5)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x - self.size_l < 70 and self.position_x > 70 and self.position_y  > 307 and self.position_y - self.size_l  < 370 :
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x - self.size_l < 50 and self.position_x > 50) or (self.position_x - self.size_l < 500 and self.position_x > 500)) and self.position_y  > 437 and self.position_y - self.size_l < 500:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x - self.size_l < 475 and self.position_x > 475 and self.position_y > 174.5 and self.position_y - self.size_l < 237.5:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x - self.size_l < 850 and self.position_x > 850) or (self.position_x + self.size_l > 925 and self.position_x < 925)) and self.position_y > 217 and self.position_y - self.size_l < 280:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x - self.size_l < 750 and self.position_x > 750 and ((self.position_y > 349 and self.position_y - self.size_l <412) or (self.position_y > 475 and self.position_y - self.size_l < 537.5)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x - self.size_l < 900 and self.position_x > 900 and self.position_y > 400 and self.position_y - self.size_l < 450:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x + self.size_l > 250 and self.position_x < 250 and self.position_y > 112 and self.position_y - self.size_l  < 175:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x + self.size_l > 150 and self.position_x < 150 and self.position_y > 307 and self.position_y - self.size_l  < 370:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x + self.size_l > 525 and self.position_x < 525 and self.position_y > 349.5 and self.position_y - self.size_l  < 412.5 :
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 450 and self.position_x < 450) or (self.position_x + self.size_l > 950 and self.position_x < 950)) and self.position_y > 50 and self.position_y - self.size_l  < 150:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x + self.size_l > 950 and self.position_x < 950 and self.position_y > 350 and self.position_y - self.size_l  < 450:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and self.position_x + self.size_l > 750 and self.position_x < 750 and ((self.position_y  > 349 and self.position_y - self.size_l <412) or (self.position_y  > 475 and self.position_y+self.size_l  <537.5)):
+                    self.position_y += self.step
+                #
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 125 and self.position_x < 125) or (self.position_x  > 125 and self.position_x - self.size_l< 125)) and self.position_y > 112.5 and self.position_y+self.size_l  <= 237.5:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 375 and self.position_x < 375) or (self.position_x  > 375 and self.position_x - self.size_l< 375)) and ((self.position_y  > 112.5 and self.position_y + self.size_l  < 175) or (self.position_y - self.size_l  > 175 and self.position_y + self.size_l  < 370)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 262.5 and self.position_x < 262.5) or (self.position_x >262.5 and self.position_x - self.size_l < 262.5)) and self.position_y - self.size_l  > 370 and self.position_y < 537.5:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 625 and self.position_x < 625) or (self.position_x  > 625 and self.position_x - self.size_l < 625)) and ((self.position_y  > 280 and self.position_y + self.size_l  < 412.5) or (self.position_y - self.size_l  > 412.5 and self.position_y + self.size_l  < 537.5)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 737.5 and self.position_x < 737.5) or (self.position_x  >737.5 and self.position_x- self.size_l < 737.5)) and self.position_y  > 112.5 and self.position_y + self.size_l < 280:
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 875 and self.position_x < 875) or (self.position_x  > 875 and self.position_x - self.size_l < 875)) and self.position_y - self.size_l > 412 and self.position_y+self.size_l  <= 537.5:
+                    self.position_y += self.step
+                elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 100 and self.position_x < 100) or (self.position_x > 100 and self.position_x - self.size_l < 100)) and ((self.position_y > 250  and self.position_y+self.size_l  < 300) or (self.position_y > 550  and self.position_y+self.size_l  < 600)):
+                    self.position_y += self.step   
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 500 and self.position_x < 500) or (self.position_x > 500 and self.position_x - self.size_l < 500)) and ((self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 150) or (self.position_y-self.size_l > 500  and self.position_y+self.size_l  < 600)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 900 and self.position_x < 900) or (self.position_x > 900 and self.position_x - self.size_l< 900)) and ((self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 100) or (self.position_y-self.size_l > 350  and self.position_y+self.size_l  < 400)):
+                    self.position_y += self.step
+                elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 400 and self.position_x < 400) or (self.position_x  > 400 and self.position_x - self.size_l< 400)) and self.position_y- self.size_l > 50  and self.position_y+self.size_l  < 100:
+                    self.position_y += self.step
                 else:
-                    self.tank_orientation -= 7.5
+                    if self.position_y < 200 and self.position_y+self.size_l >= 200 and self.position_x-self.size_w < 50:#derecha
+                        self.position_y = 200-self.size_l
+                    elif self.position_y < 250 and self.position_y+self.size_l >= 250 and self.position_x +self.size_w >=100 and self.position_x-self.size_w <=100:#raya cuadradoabajo dr
+                        self.position_y=250-self.size_l
+                    elif self.position_y < 112.5 and self.position_y+self.size_l >= 112.5 and ((self.position_x+self.size_w > 125 and self.position_x-self.size_w < 250) or (self.position_x+self.size_w >= 375 and self.position_x-self.size_w < 375) or (self.position_x+self.size_w >= 737.5 and self.position_x-self.size_w < 737.5)):
+                        self.position_y = 112.5-self.size_l
+                    elif self.position_y < 175 and self.position_y+self.size_l >= 175 and self.position_x+self.size_w > 250 and self.position_x-self.size_w < 375:#raya central central
+                        self.position_y = 175 - self.size_l
+                    elif self.position_y < 237.5 and self.position_y+self.size_l >= 237.5 and ((self.position_x-self.size_w < 250 and self.position_x+self.size_w > 125) or (self.position_x+self.size_w >= 375 and self.position_x-self.size_w < 475)):
+                        self.position_y = 237.5-self.size_l
+                    elif self.position_y < 150 and self.position_y+self.size_l >= 150 and ((self.position_x + self.size_w > 450 and self.position_x - self.size_w <= 500)or (self.position_x + self.size_w > 950 and self.position_x - self.size_w <= 1000)):
+                        self.position_y = 150 - self.size_l
+                    elif self.position_y < 370 and self.position_y + self.size_l >= 370 and ((self.position_x + self.size_w > 0 and self.position_x - self.size_w <= 70) or (self.position_x + self.size_w > 150 and self.position_x - self.size_w <= 375)):
+                        self.position_y = 370 - self.size_l
+                    elif self.position_y < 500 and self.position_y + self.size_l >= 500 and ((self.position_x + self.size_w > 0 and self.position_x - self.size_w <= 50) or (self.position_x + self.size_w > 500 and self.position_x - self.size_w <= 550)):
+                        self.position_y = 500 - self.size_l
+                    elif self.position_y < 412.5 and self.position_y + self.size_l >= 412.5 and ((self.position_x + self.size_w > 525 and self.position_x - self.size_w <= 625) or (self.position_x + self.size_w > 750 and self.position_x - self.size_w <= 875)):
+                        self.position_y = 412.5 - self.size_l
+                    elif self.position_y < 280 and self.position_y + self.size_l >= 280 and ((self.position_x + self.size_w > 625 and self.position_x - self.size_w <= 850) or (self.position_x + self.size_w > 925 and self.position_x - self.size_w <= 1000)):
+                        self.position_y = 280 - self.size_l
+                    elif self.position_y < 550 and self.position_y + self.size_l >= 550 and ((self.position_x + self.size_w > 100 and self.position_x - self.size_w <= 100) or (self.position_x + self.size_w > 600 and self.position_x - self.size_w <= 600)):
+                        self.position_y = 550 - self.size_l
+                    elif self.position_y < 350 and self.position_y + self.size_l >= 350 and self.position_x + self.size_w > 900 and self.position_x - self.size_w <= 1000:
+                        self.position_y = 350 - self.size_l
+                    elif self.position_y < 450 and self.position_y + self.size_l >= 450 and self.position_x + self.size_w > 950 and self.position_x - self.size_w <= 1000:
+                        self.position_y = 450 - self.size_l
+                    elif self.position_y < 475 and self.position_y + self.size_l >= 475 and self.position_x + self.size_w > 625 and self.position_x - self.size_w <= 750:
+                        self.position_y = 475 - self.size_l
+                    elif self.position_y < 537.5 and self.position_y + self.size_l >= 537.5 and self.position_x + self.size_w > 750 and self.position_x - self.size_w <= 875:
+                        self.position_y = 537.5 - self.size_l
+                    elif self.position_y < 300 and self.position_y + self.size_l >= 300 and  self.position_x - self.size_w <= 100:
+                        self.position_y = 300 - self.size_l
+                    elif self.position_y+self.step > CANVAS_HEIGHT-self.size_l:
+                        self.position_y = CANVAS_HEIGHT-self.size_l
+                    else:
+                        self.position_y += self.step
+                   
+                    if self.tank_orientation != 270:
+                        if self.tank_orientation > 270:
+                            self.tank_orientation -= 7.5
+                        elif self.tank_orientation >= 90:
+                            self.tank_orientation += 7.5
+                        elif self.tank_orientation <= 7.5:
+                            self.tank_orientation = 360
+                        else:
+                            self.tank_orientation -= 7.5
+                            
         elif movement == 4:#izquierda
             if self.mapa == 1:
                 if self.tank_orientation == 360 and self.position_y < 140 and self.position_y + self.size_l >= 140 and ((self.position_x > 170 and self.position_x < 330) or (self.position_x > 670 and self.position_x < 830)):
@@ -474,52 +639,91 @@ class TankClass:
                             self.tank_orientation -= 7.5
                   
             elif self.mapa == 2:
-                if self.position_x > 50 and self.position_x-self.size_l <= 50 and ((self.position_y+self.size_w >= 200 and self.position_y-self.size_w <=200) or (self.position_y+self.size_w >= 500 and self.position_y-self.size_w <=500)):
-                    self.poosition_x = 50 + self.size_l
-                elif self.position_x > 100 and self.position_x - self.size_l <= 100 and ((self.position_y+self.size_w >= 250 and self.position_y-self.size_w <=300) or (self.position_y+self.size_w >= 550 and self.position_y-self.size_w <=600)):
-                    self.position_x = 100 + self.size_l
-                elif self.position_x > 125 and self.position_x-self.size_l <= 125 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5: 
-                    self.position_x = 125+self.size_l
-                elif self.position_x > 250 and self.position_x-self.size_l <= 250 and ((self.position_y-self.size_w < 112.5 and self.position_y+self.size_w > 112.5) or(self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5)):
-                    self.position_x = 250 + self.size_l
-                elif self.position_x > 375 and self.position_x - self.size_l <= 375 and self.position_y-self.size_w <370 and self.position_y+self.size_w > 112.5:
-                    self.position_x = 375 + self.size_l
-                elif self.position_x > 400 and self.position_x - self.size_l <= 400 and self.position_y-self.size_w < 100:
-                    self.position_x = 400+self.size_l
-                elif self.position_x > 70 and self.position_x - self.size_l <= 70 and self.position_y-self.size_w < 100  and self.position_y+self.size_w > 100:
-                    self.position_x = 70+self.size_l
-                elif self.position_x > 262.5 and self.position_x - self.size_l <= 262.5 and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 370:
-                    self.position_x = 262.5+self.size_l
-                elif self.position_x > 475 and self.position_x - self.size_l <= 475 and self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5:
-                    self.position_x = 475+self.size_l
-                elif self.position_x > 550 and self.position_x - self.size_l <= 550 and self.position_y-self.size_w < 500 and self.position_y+self.size_w > 500:
-                    self.position_x = 550+self.size_l
-                elif self.position_x > 600 and self.position_x - self.size_l <= 600 and self.position_y-self.size_w < 600 and self.position_y+self.size_w > 550:
-                    self.position_x = 600+self.size_l
-                elif self.position_x > 500 and self.position_x - self.size_l <= 500 and ((self.position_y-self.size_w < 600 and self.position_y+self.size_w > 500)or(self.position_y-self.size_w < 150 and self.position_y+self.size_w > 50)):
-                    self.position_x = 500+self.size_l
-                elif self.position_x > 900 and self.position_x - self.size_l <= 900 and ((self.position_y-self.size_w < 150 and self.position_y+self.size_w > 50)or(self.position_y-self.size_w < 400 and self.position_y+self.size_w > 350)):
-                    self.position_x = 900+self.size_l
-                elif self.position_x > 737.5 and self.position_x - self.size_l <= 737.5 and self.position_y-self.size_w < 280 and self.position_y+self.size_w > 112.5:
-                    self.position_x = 737.5+self.size_l
-                elif self.position_x > 850 and self.position_x - self.size_l <= 850 and self.position_y-self.size_w < 280 and self.position_y+self.size_w > 280:
-                    self.position_x = 850+self.size_l
-                elif self.position_x > 625 and self.position_x - self.size_l <= 625  and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 280:
-                    self.position_x = 625 +self.size_l
-                elif self.position_x > 750 and self.position_x - self.size_l <= 750  and self.position_y-self.size_w < 475 and self.position_y+self.size_w > 475:
-                    self.position_x = 750 +self.size_l
-                elif self.position_x > 875 and self.position_x - self.size_l <= 875  and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 412:
-                    self.position_x = 875 +self.size_l
-                elif self.position_x-self.step < self.size_l:
-                    self.position_x = self.size_l
-                else:
+                if self.tank_orientation == 360 and ((self.position_y <= 112.5 and self.position_y + self.size_l >= 112.5) or (self.position_y >= 112.5 and self.position_y - self.size_l <= 112.5)) and ((self.position_x - self.size_l <= 250 and self.position_x + self.size_l >= 125) or (self.position_x - self.size_l <= 737.5 and self.position_x + self.size_l >= 737.5)):
                     self.position_x -= self.step
-                   
-            if self.tank_orientation != 180:
-                if self.tank_orientation < 180:
-                    self.tank_orientation += 7.5
+                elif self.tank_orientation == 360 and ((self.position_y <= 175 and self.position_y + self.size_l >= 175) or (self.position_y >= 175 and self.position_y - self.size_l <= 175)) and self.position_x + self.size_l >= 250 and self.position_x + self.size_l <= 375:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 237.5 and self.position_y + self.size_l >= 237.5) or (self.position_y >= 237.5 and self.position_y - self.size_l <= 237.5)) and ((self.position_x - self.size_l <= 250 and self.position_x >= 125) or (self.position_x - self.size_l <= 475 and self.position_x - self.size_l >= 375)):
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 200 and self.position_y + self.size_l >= 200) or (self.position_y >= 200 and self.position_y - self.size_l <= 200)) and self.position_x - self.size_l <= 50 and self.position_x >= 0:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 300 and self.position_y + self.size_l >= 300) or (self.position_y >= 300 and self.position_y - self.size_l <= 300)) and self.position_x - self.size_l <= 100 and self.position_x >= 0:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 370 and self.position_y + self.size_l >= 370) or (self.position_y >= 370 and self.position_y - self.size_l <= 370)) and ((self.position_x - self.size_l <= 70 and self.position_x >= 0) or (self.position_x + self.size_l <= 375 and self.position_x + self.size_l >=150)):
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 500 and self.position_y + self.size_l >= 500) or (self.position_y >= 500 and self.position_y - self.size_l <= 500)) and ((self.position_x - self.size_l <= 50 and self.position_x >= 0) or (self.position_x - self.size_l <= 550 and self.position_x >= 500)) :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and self.position_y <= 550 and self.position_y + self.size_l >= 550 and self.position_x - self.size_l <= 100 and self.position_x + self.size_l >= 100 :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and self.position_y >= 237.5 and self.position_y - self.size_l <= 237 and self.position_x - self.size_l <= 475 and self.position_x + self.size_l >= 375 :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 412.5 and self.position_y + self.size_l >= 412.5) or (self.position_y >= 412.5 and self.position_y - self.size_l <= 412.5)) and self.position_x + self.size_l <= 625 and self.position_x + self.size_l > 525 :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 150 and self.position_y + self.size_l >= 150) or (self.position_y >= 150 and self.position_y - self.size_l <= 150)) and ((self.position_x + self.size_l <= 500 and self.position_x + self.size_l >= 450) or (self.position_x <= 1000 and self.position_x + self.size_l >= 950)) :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and self.position_y >= 100 and self.position_y - self.size_l <= 100 and ((self.position_x - self.size_l <= 400 and self.position_x>= 400) or (self.position_x - self.size_l <= 900 and self.position_x + self.size_l >= 900)) :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 280 and self.position_y + self.size_l >= 280) or (self.position_y >= 280 and self.position_y - self.size_l <= 280)) and ((self.position_x - self.size_l <= 850 and self.position_x - self.size_l >= 737.5) or (self.position_x  <= 1000 and self.position_x + self.size_l >= 925) or (self.position_x + self.size_l <= 737.5 and self.position_x + self.size_l >= 625)) :
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 350 and self.position_y + self.size_l >= 350) or (self.position_y >= 350 and self.position_y - self.size_l <= 350)) and self.position_x - self.size_l <= 1000 and self.position_x >= 900:
+                    self.position_x -= self.step 
+                elif self.tank_orientation == 360 and ((self.position_y <= 450 and self.position_y + self.size_l >= 450) or (self.position_y >= 450 and self.position_y - self.size_l <= 450)) and self.position_x - self.size_l <= 1000 and self.position_x >= 950:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and self.position_y >= 400 and self.position_y - self.size_l <= 400 and self.position_x - self.size_l <= 900 and self.position_x >= 900:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 412 and self.position_y + self.size_l >= 412) or (self.position_y >= 412 and self.position_y - self.size_l <= 412)) and self.position_x - self.size_l <= 875 and self.position_x +self.size_l >= 750:
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 537.5 and self.position_y + self.size_l >= 527.5) or (self.position_y >= 537.5 and self.position_y - self.size_l <= 537.5)) and ((self.position_x - self.size_l <= 875 and self.position_x + self.size_l >= 750) or (self.position_x - self.size_l <= 262.5 and self.position_x + self.size_l >= 262.5)):
+                    self.position_x -= self.step
+                elif self.tank_orientation == 360 and ((self.position_y <= 475 and self.position_y + self.size_l >= 475) or (self.position_y >= 475 and self.position_y - self.size_l <= 475)) and self.position_x - self.size_l <= 750 and self.position_x - self.size_l >= 625 :
+                    self.position_x -= self.step
                 else:
-                    self.tank_orientation -= 7.5
+                    if self.position_x > 50 and self.position_x-self.size_l <= 50 and ((self.position_y+self.size_w >= 200 and self.position_y-self.size_w <=200) or (self.position_y+self.size_w >= 500 and self.position_y-self.size_w <=500)):
+                        self.poosition_x = 50 + self.size_l
+                    elif self.position_x > 100 and self.position_x - self.size_l <= 100 and ((self.position_y+self.size_w >= 250 and self.position_y-self.size_w <=300) or (self.position_y+self.size_w >= 550 and self.position_y-self.size_w <=600)):
+                        self.position_x = 100 + self.size_l
+                    elif self.position_x > 125 and self.position_x-self.size_l <= 125 and self.position_y-self.size_w <237.5 and self.position_y+self.size_w > 112.5: 
+                        self.position_x = 125+self.size_l
+                    elif self.position_x > 250 and self.position_x-self.size_l <= 250 and ((self.position_y-self.size_w < 112.5 and self.position_y+self.size_w > 112.5) or(self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5)):
+                        self.position_x = 250 + self.size_l
+                    elif self.position_x > 375 and self.position_x - self.size_l <= 375 and self.position_y-self.size_w <370 and self.position_y+self.size_w > 112.5:
+                        self.position_x = 375 + self.size_l
+                    elif self.position_x > 400 and self.position_x - self.size_l <= 400 and self.position_y-self.size_w < 100:
+                        self.position_x = 400+self.size_l
+                    elif self.position_x > 70 and self.position_x - self.size_l <= 70 and self.position_y - self.size_w < 370  and self.position_y+self.size_w > 370:
+                        self.position_x = 70+self.size_l
+                    elif self.position_x > 262.5 and self.position_x - self.size_l <= 262.5 and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 370:
+                        self.position_x = 262.5+self.size_l
+                    elif self.position_x > 475 and self.position_x - self.size_l <= 475 and self.position_y-self.size_w < 237.5 and self.position_y+self.size_w > 237.5:
+                        self.position_x = 475+self.size_l
+                    elif self.position_x > 550 and self.position_x - self.size_l <= 550 and self.position_y-self.size_w < 500 and self.position_y+self.size_w > 500:
+                        self.position_x = 550+self.size_l
+                    elif self.position_x > 600 and self.position_x - self.size_l <= 600 and self.position_y-self.size_w < 600 and self.position_y+self.size_w > 550:
+                        self.position_x = 600+self.size_l
+                    elif self.position_x > 500 and self.position_x - self.size_l <= 500 and ((self.position_y-self.size_w < 600 and self.position_y+self.size_w > 500)or(self.position_y-self.size_w < 150 and self.position_y+self.size_w > 50)):
+                        self.position_x = 500+self.size_l
+                    elif self.position_x > 900 and self.position_x - self.size_l <= 900 and ((self.position_y-self.size_w < 150 and self.position_y+self.size_w > 50)or(self.position_y-self.size_w < 400 and self.position_y+self.size_w > 350)):
+                        self.position_x = 900+self.size_l
+                    elif self.position_x > 737.5 and self.position_x - self.size_l <= 737.5 and self.position_y-self.size_w < 280 and self.position_y+self.size_w > 112.5:
+                        self.position_x = 737.5+self.size_l
+                    elif self.position_x > 850 and self.position_x - self.size_l <= 850 and self.position_y-self.size_w < 280 and self.position_y+self.size_w > 280:
+                        self.position_x = 850+self.size_l
+                    elif self.position_x > 625 and self.position_x - self.size_l <= 625  and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 280:
+                        self.position_x = 625 +self.size_l
+                    elif self.position_x > 750 and self.position_x - self.size_l <= 750  and self.position_y-self.size_w < 475 and self.position_y+self.size_w > 475:
+                        self.position_x = 750 +self.size_l
+                    elif self.position_x > 875 and self.position_x - self.size_l <= 875  and self.position_y-self.size_w < 537.5 and self.position_y+self.size_w > 412:
+                        self.position_x = 875 +self.size_l
+                    elif self.position_x-self.step < self.size_l:
+                        self.position_x = self.size_l
+                    else:
+                        self.position_x -= self.step
+                   
+                    if self.tank_orientation != 180:
+                        if self.tank_orientation < 180:
+                            self.tank_orientation += 7.5
+                        else:
+                            self.tank_orientation -= 7.5
 
 
 
