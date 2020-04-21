@@ -84,7 +84,7 @@ def draw_board(canvas, message):
             team_lives[0]+=1
         else:
             team_lives[1]+=1
-        
+        t_orientation = tank.get_tank_orientation()
         #Mira como está orientado el tanque y elige la foto correspondiente
         if t_orientation > 169:
             if t_orientation > 259:
