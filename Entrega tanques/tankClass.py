@@ -386,7 +386,7 @@ class TankClass:
                             self.tank_orientation -= 7.5
             
             elif self.mapa == 2:
-               if self.position_y < 200 and self.position_y+self.size_l >= 200 and self.position_x-self.size_w < 50:#derecha
+                if self.position_y < 200 and self.position_y+self.size_l >= 200 and self.position_x-self.size_w < 50:#derecha
                     self.position_y = 200-self.size_l
                 elif self.position_y < 250 and self.position_y+self.size_l >= 250 and self.position_x +self.size_w >=100 and self.position_x-self.size_w <=100:#raya cuadradoabajo dr
                     self.position_y=250-self.size_l
