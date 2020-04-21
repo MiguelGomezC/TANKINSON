@@ -112,27 +112,35 @@ def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks,
     semaphore_bullets.release()
     return (board_tanks.items(), bullets_copy)
 
-def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa):
+def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini):
     value = random.random()
     semaphore_count.acquire()
     if count.value > 0:
         count.value -= 1
+        position_ini.value +=1
+        pos_ini = position_ini.value
         semaphore_count.release()
         team = 0
     elif count.value < 0:
         count.value += 1
+        position_ini.value +=1
+        pos_ini = position_ini.value
         semaphore_count.release()
         team = 1
     else:
         if value <= 0.5:
             count.value += 1
+            position_ini.value +=1
+            pos_ini = position_ini.value
             semaphore_count.release()
             team = 1
         else:
             count.value -= 1
+            position_ini.value +=1
+            pos_ini = position_ini.value
             semaphore_count.release()
             team = 0
-    tank = tankClass.TankClass(team, id[1], mapa)
+    tank = tankClass.TankClass(team, id[1], mapa, pos_ini)
     board_tanks[id[1]] = tank
     while True:
         try:
@@ -182,6 +190,7 @@ if __name__ == '__main__':
     semaphore_tanks = Lock()
     semaphore_bullets = Lock()
     count = Value('i',0)
+    position_ini = Value('i',0)
     semaphore_count = Lock()
     mapa=random.randint(1,2)
     
@@ -193,7 +202,7 @@ if __name__ == '__main__':
         try:
             conn = listener.accept()                
             print ('connection accepted from', listener.last_accepted)
-            p = Process(target=serve_client, args=(conn, listener.last_accepted, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa))
+            p = Process(target=serve_client, args=(conn, listener.last_accepted, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini))
             p.start()
         except AuthenticationError:
             print ('Connection refused, incorrect password')
