@@ -20,12 +20,10 @@ from multiprocessing import Value
 
 import time
 import random
-import math
+
 
 import tankClass
 
-CANVAS_WIDTH = 250
-CANVAS_HEIGHT = 500
 
 def queue_copy(q):
     p = []
@@ -93,7 +91,7 @@ def clear_client(board, id):
     print("board pop")
     board.pop(id[1])
 
-def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m): #canvas size 500X250
+def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m): 
     pointer_pos, movement, shoot, reload = m
     semaphore_bullets.acquire()
     semaphore_tanks.acquire()
@@ -192,6 +190,9 @@ if __name__ == '__main__':
     count = Value('i',0)
     position_ini = Value('i',0)
     semaphore_count = Lock()
+    
+    #Se elegirá el mapa siempre al azar
+    
     mapa=random.randint(1,2)
     
     mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa))
