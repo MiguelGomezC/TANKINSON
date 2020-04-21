@@ -221,7 +221,6 @@ class TankClass:
                             self.tank_orientation += 7.5
                    
             elif self.mapa == 2:
-                elif self.mapa == 2:
                 if self.tank_orientation == 270 and self.position_x - self.size_l < 50 and self.position_x > 50 and self.position_y+self.size_l >200 and self.position_y < 300:
                     self.position_y -= self.step
                 elif self.tank_orientation == 270 and self.position_x - self.size_l < 250 and self.position_x > 250 and ((self.position_y +self.size_l > 112.5 and self.position_y  < 175) or (self.position_y +self.size_l > 237.5 and self.position_y+self.size_l  <= 330)):
