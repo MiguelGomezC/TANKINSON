@@ -145,11 +145,6 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
             m = conn.recv()
         except EOFError:
             print('No receive, connection abruptly closed by client')
-            semaphore_tanks.acquire()
-            clear_client(board_tanks,id)
-            semaphore_tanks.release()
-            conn.close()
-            print ('connection', id, 'closed')
             break
         print ('received message:', m, 'from', id[1])
         
@@ -170,11 +165,6 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
                 conn.send(answer)
             except IOError:
                 print ('No send, connection abruptly closed by client')
-                semaphore_tanks.acquire()
-                clear_client(board_tanks,id)
-                semaphore_tanks.release()
-                conn.close()
-                print ('connection', id, 'closed')
                 break
             print('tank',id,'is dead')
             
@@ -184,11 +174,6 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
             conn.send(answer)
         except IOError:
             print ('No send, connection abruptly closed by client')
-            semaphore_tanks.acquire()
-            clear_client(board_tanks,id)
-            semaphore_tanks.release()
-            conn.close()
-            print ('connection', id, 'closed')
             break
         time.sleep(0.01)
 
