@@ -164,6 +164,7 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
             answer = (board_elements, id[1], mapa)
             try:
                 conn.send(answer)
+                break
             except IOError:
                 print ('No send, connection abruptly closed by client')
                 break
