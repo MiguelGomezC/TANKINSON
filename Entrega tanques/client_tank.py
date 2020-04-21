@@ -86,7 +86,9 @@ def draw_board(canvas, message):
         else:
             team_lives[1]+=1
         t_orientation = tank.get_tank_orientation()
+        
         #Mira como está orientado el tanque y elige la foto correspondiente
+        
         if t_orientation > 169:
             if t_orientation > 259:
                 if t_orientation > 304:
@@ -139,7 +141,9 @@ def draw_board(canvas, message):
                         canvas.create_image(x_tank-34, y_tank-27, image=tank_img_5, anchor=NW)
         
         p_orientation = tank.get_pointer_orientation()
+        
         #Mira donde apunta el tanque y elige la foto correspondiente
+        
         if p_orientation > 169:
             if p_orientation > 259:
                 if p_orientation > 304:
@@ -204,32 +208,16 @@ def draw_board(canvas, message):
             canvas.create_image(x_bullet-6, y_bullet-7, image=small_bullet_blue_img, anchor=NW)
         else:
             canvas.create_image(x_bullet-6, y_bullet-7, image=small_bullet_red_img, anchor=NW)
-    #Para crear el marcador,solo hay un rectangulo gris ahora mismo si va a grey99 ->negro y grey1->blanco y entre medias los demas tonos de gris
+            
+    #Dibujamos el marcador:
+    
     canvas.create_rectangle(0,0,CANVAS_WIDTH,CANVAS_SCORE,fill="grey70")
-    canvas.create_rectangle(10, 10, 150, 40, fill= "grey50")
-    canvas.create_rectangle(340, 10, 490, 40, fill= "grey50")
+    canvas.create_rectangle(10, 10, 150, 40, fill= "MediumPurple1")
+    canvas.create_rectangle(850, 10, 990, 40, fill= "Plum2")
     canvas.create_text(50, 25, text="Equipo 1", fill="black", font=("Arial", 15))
-    canvas.create_text(380, 25, text="Equipo 2", fill="black", font=("Arial", 15))
+    canvas.create_text(890, 25, text="Equipo 2", fill="black", font=("Arial", 15))
     
-    #ESTRELLAS GRISES (EQUIPO 1)
-    #canvas.create_image(95,20,image = estrella_gris, anchor= NW)
-    #canvas.create_image(110,20,image = estrella_gris, anchor= NW)
-    #canvas.create_image(125,20,image = estrella_gris, anchor= NW)
-    
-    #ESTRELLAS AMARILLAS (EQUIPO 1)
-    #canvas.create_image(95,20,image = estrella_amarilla, anchor= NW)
-    #canvas.create_image(110,20,image = estrella_amarilla, anchor= NW)
-    #canvas.create_image(125,20,image = estrella_amarilla, anchor= NW)
-
-    #ESTRELLAS GRISES (EQUIPO 2)
-    #canvas.create_image(425,20,image = estrella_gris, anchor= NW)
-    #canvas.create_image(440,20,image = estrella_gris, anchor= NW)
-    #canvas.create_image(455,20,image = estrella_gris, anchor= NW)
-    
-    #ESTRELLAS AMARILLAS (EQUIPO 2)
-    #canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
-    #canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
-    #canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
+    #Dibujamos las estrellas según las vidas de cada tanque del equipo
     
     if team_lives[0]==0:
         canvas.create_image(95,20,image = estrella_gris, anchor= NW)
@@ -250,38 +238,23 @@ def draw_board(canvas, message):
         
         
     if team_lives[1]==0:
-        canvas.create_image(425,20,image = estrella_gris, anchor= NW)
-        canvas.create_image(440,20,image = estrella_gris, anchor= NW)
-        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(935,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(950,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(965,20,image = estrella_gris, anchor= NW)
     elif team_lives[1]==1:
-        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
-        canvas.create_image(440,20,image = estrella_gris, anchor= NW)
-        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(935,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(950,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(965,20,image = estrella_gris, anchor= NW)
     elif team_lives[1]==2:
-        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
-        canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
-        canvas.create_image(455,20,image = estrella_gris, anchor= NW)
+        canvas.create_image(935,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(950,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(965,20,image = estrella_gris, anchor= NW)
     else:
-        canvas.create_image(425,20,image = estrella_amarilla, anchor= NW)
-        canvas.create_image(440,20,image = estrella_amarilla, anchor= NW)
-        canvas.create_image(455,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(935,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(950,20,image = estrella_amarilla, anchor= NW)
+        canvas.create_image(965,20,image = estrella_amarilla, anchor= NW)
     
-    #Has perdido
-    """
-    canvas.create_rectangle(40, 40, 460, 260,fill= "yellow")
-    canvas.create_rectangle(60, 60, 440, 240,fill= "grey30")
-    canvas.create_text(245, 100, text="GAME OVER", fill="black", font=("Arial", 40, "bold"))
-    canvas.create_image(110,135,image = estrella_gameover, anchor= NW)
-    canvas.create_image(200,135,image = estrella_gameover, anchor= NW)
-    canvas.create_image(290,135,image = estrella_gameover, anchor= NW)
-    """
-    #Has ganado
-    """
-    canvas.create_rectangle(40, 40, 460, 260,fill= "yellow")
-    canvas.create_rectangle(50, 50, 450, 250,fill= "grey20")
-    canvas.create_text(245, 100, text="YOU WIN!", fill="yellow", font=("Arial", 40, "bold"))
-    canvas.create_image(200,135,image = trofeo, anchor= NW)
-    """
+    #Pasamos a dibijar el primer mapa
     
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
@@ -303,7 +276,9 @@ def draw_board(canvas, message):
         canvas.create_rectangle(670,140,830,235,fill="grey99")
         canvas.create_rectangle(670,415,830,510,fill="grey99")
         canvas.create_rectangle(475,271.25,525,353.75,fill="grey99")
-        
+    
+    #El segundo mapa: 
+    
     elif mapa == 2:
         canvas.create_line(0,200,50,200,fill="grey99")
         canvas.create_line(100,250,100,300,fill="grey99")
@@ -356,6 +331,25 @@ def draw_board(canvas, message):
         canvas.create_line(875,412,875,537.5,fill="grey99")
         canvas.create_line(750,412,875,412,fill="grey99")
     
+    """
+    
+    #Has perdido
+    
+    canvas.create_rectangle(310, 190, 730, 410,fill= "yellow")
+    canvas.create_rectangle(330, 210, 710, 390,fill= "grey30")
+    canvas.create_text(515, 250, text="GAME OVER", fill="black", font=("Arial", 40, "bold"))
+    canvas.create_image(400,285,image = estrella_gameover, anchor= NW)
+    canvas.create_image(490,285,image = estrella_gameover, anchor= NW)
+    canvas.create_image(580,285,image = estrella_gameover, anchor= NW)
+    
+    #Has ganado
+    
+    canvas.create_rectangle(310, 190, 730, 410,fill= "yellow")
+    canvas.create_rectangle(330, 210, 710, 390,fill= "grey20")
+    canvas.create_text(515, 250, text="YOU WIN!", fill="yellow", font=("Arial", 40, "bold"))
+    canvas.create_image(470,285,image = trofeo, anchor= NW)
+    
+    """
 if __name__ == '__main__':    
 
     root = Tk()
@@ -378,6 +372,8 @@ if __name__ == '__main__':
     pointer_x, pointer_y = 0,0
     movement = 0
     last_movement = 0
+    
+    #Cargamos todas las imágenes
     
     tank_img_1 = PhotoImage(file='images/tank_1.png')
     tank_img_2 = PhotoImage(file='images/tank_2.png')
