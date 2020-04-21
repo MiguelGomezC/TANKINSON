@@ -144,7 +144,7 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
     while True:
         try:
             m = conn.recv()
-        except EOFError:
+        except:
             print('No receive, connection abruptly closed by client')
             break
         print ('received message:', m, 'from', id[1])
