@@ -67,14 +67,14 @@ class TankClass:
                 self.tank_orientation = 90
                 self.pointer_orientation = 270
         elif mapa == 2:
-           if inicio == 1:
+           if ini == 1:
                 self.position_x = 50
                 self.position_y = 250
                 self.pointer_x = 250
                 self.pointer_y = 150
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
-           elif inicio == 2:
+           elif ini == 2:
                 self.position_x = 450
                 self.position_y = 100
                 self.pointer_x = 250
@@ -82,7 +82,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif inicio == 3:
+           elif ini == 3:
                 self.position_x = 550
                 self.position_y = 550
                 self.pointer_x = 250
@@ -90,7 +90,7 @@ class TankClass:
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
                 
-           elif inicio == 4:
+           elif ini == 4:
                 self.position_x = 950
                 self.position_y = 100
                 self.pointer_x = 250
@@ -98,7 +98,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif inicio == 5:
+           elif ini == 5:
                 self.position_x = 50
                 self.position_y = 550
                 self.pointer_x = 250
