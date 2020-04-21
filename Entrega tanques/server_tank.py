@@ -17,6 +17,7 @@ from multiprocessing import Lock
 from multiprocessing import Manager
 from multiprocessing import Queue
 from multiprocessing import Value
+from tkinter import *
 
 import time
 import random
@@ -198,9 +199,51 @@ if __name__ == '__main__':
     position_ini = Value('i',0)
     semaphore_count = Lock()
     
-    #Se elegirá el mapa siempre al azar
+    #Usamos Tkinter para poder elegir entre los dos mapas 
     
-    mapa=random.randint(1,2)
+    root = Tk()
+    root.title("New game")
+    root.resizable(0, 0)
+    root.iconbitmap("Tanque2.ico")
+    
+    def opciones_mapa():
+        opcionEscogida = ""
+    
+        if (mapa1.get()==1 and mapa2.get()==0):
+            opcionEscogida += " Mapa 1 "
+            return  1
+        if (mapa2.get()==1 and mapa1.get()==0):
+            opcionEscogida += " Mapa 2 "
+            return 2
+        if (mapa2.get()==0 and mapa1.get()==0):
+            opcionEscogida += " Elige opción "
+        if (mapa2.get()==1 and mapa1.get()==1):
+            opcionEscogida += " Elige opción "
+
+        textoFinal.config(text= opcionEscogida)
+    
+    
+    mapa1 = IntVar()
+    mapa2 = IntVar()
+    foto = PhotoImage(file = "mapita1.png")
+    Label(root, image = foto).pack()
+    frame = Frame(root)
+    frame.pack()
+    Label(frame, text = "Elige el mapa", width = 60).pack()
+    Checkbutton(frame, text = "Mapa 1", variable = mapa1, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
+    Checkbutton(frame, text = "Mapa 2", variable = mapa2, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
+    textoFinal= Label(frame)
+    textoFinal.pack()
+    
+    def quit():
+        root.destroy()
+    
+    #Cuando pulsemos Aceptar desaparecerá la ventana con las opciones 
+    Button(root, text="Aceptar", command=quit).pack()
+    root.mainloop()
+
+    
+    mapa = opciones_mapa()
     
     mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa))
     mb.start()
