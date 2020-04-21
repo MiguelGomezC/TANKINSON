@@ -80,6 +80,7 @@ def draw_board(canvas, message):
     for key, tank in board_tanks:
         (x_tank, y_tank)  = tank.get_position()
         t_team = tank.get_team()
+        t_orientation = tank.get_tank_orientation()
         if t_team==0:
             team_lives[0]+=1
         else:
