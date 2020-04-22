@@ -17,6 +17,7 @@ from multiprocessing import Lock
 from multiprocessing import Manager
 from multiprocessing import Queue
 from multiprocessing import Value
+from multiprocessing import Pipe
 from tkinter import *
 
 import time
@@ -111,7 +112,7 @@ def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks,
     semaphore_bullets.release()
     return (board_tanks.items(), bullets_copy)
 
-def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini):
+def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini):
     value = random.random()
     semaphore_count.acquire()
     if count.value > 0:
@@ -181,10 +182,25 @@ def serve_client(conn, id, board_tanks, semaphore_tanks, board_bullets, semaphor
 
     semaphore_tanks.acquire()
     clear_client(board_tanks,id)
+    beg.send(pos_ini)
     semaphore_tanks.release()
     conn.close()
     print ('connection', id, 'closed')
 
+def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini):
+    """
+    Proceso que mete a los clientes en la partida por orden de cola si hay hueco
+    """
+    while True:
+        m = end.recv()
+        wait_semaphore.acquire()
+        if len(board_tanks)<6 and queue.qsize()>0:
+            conn, last_accepted=queue.get()
+            if type(m) == int:
+                position_ini = m
+            p = Process(target=serve_client, args=(conn, last_accepted, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini))
+            p.start()
+        wait_semaphore.release()
 
 if __name__ == '__main__':
 
@@ -248,17 +264,23 @@ if __name__ == '__main__':
     
     mb = Process(target=move_bullets, args=(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa))
     mb.start()
-
+    
+    queue = Queue() #lista de espera
+    wait_semaphore = Lock()
+    end, beg = Pipe(False) #serve_client y el propio connect notifica cuando un usuario es derrotado y queda un sitio libre, y el proceso connect lo detecta.
+    q = Process(target=connect, args = (queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini))
+    q.start()
     while True:
         print ('accepting conexions')
         try:
-            conn = listener.accept()                
+            conn = listener.accept()
             print ('connection accepted from', listener.last_accepted)
-            p = Process(target=serve_client, args=(conn, listener.last_accepted, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini))
-            p.start()
+            wait_semaphore.acquire()
+            queue.put((conn, listener.last_accepted))
+            beg.send('new user')
+            wait_semaphore.release()
         except AuthenticationError:
             print ('Connection refused, incorrect password')
-
     listener.close()
     print ('end')
 
