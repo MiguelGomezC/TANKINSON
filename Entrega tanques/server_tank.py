@@ -192,9 +192,9 @@ def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_b
     Proceso que mete a los clientes en la partida por orden de cola si hay hueco
     """
     while True:
-        m = end.recv()
+        m = end.poll(15)
         wait_semaphore.acquire()
-        if len(board_tanks)<6 and queue.qsize()>0:
+        while len(board_tanks)<6 and queue.qsize()>0:
             conn, last_accepted=queue.get()
             if type(m) == int:
                 position_ini = m
