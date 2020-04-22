@@ -226,37 +226,43 @@ if __name__ == '__main__':
     def opciones_mapa():
         opcionEscogida = ""
     
-        if (mapa1.get()==1 and mapa2.get()==0):
-            opcionEscogida += " Mapa 1 "
+        if (map1.get()==1 and map2.get()==0):
+            opcionEscogida += " Map 1 "
             return  2
-        if (mapa2.get()==1 and mapa1.get()==0):
-            opcionEscogida += " Mapa 2 "
+        elif (map2.get()==1 and map1.get()==0):
+            opcionEscogida += " Map 2 "
             return 1
-        if (mapa2.get()==0 and mapa1.get()==0):
-            opcionEscogida += " Elige opción "
-        if (mapa2.get()==1 and mapa1.get()==1):
-            opcionEscogida += " Elige opción "
+        elif (map2.get()==0 and map1.get()==0):
+            opcionEscogida += " You have to choose a map "
+        else:
+            opcionEscogida += " Choose only one map "
 
         textoFinal.config(text= opcionEscogida)
     
     
-    mapa1 = IntVar()
-    mapa2 = IntVar()
+    map1 = IntVar()
+    map2 = IntVar()
     foto = PhotoImage(file = "mapita1.png")
     Label(root, image = foto).pack()
     frame = Frame(root)
     frame.pack()
     Label(frame, text = "Elige el mapa", width = 60).pack()
-    Checkbutton(frame, text = "Mapa 1", variable = mapa1, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
-    Checkbutton(frame, text = "Mapa 2", variable = mapa2, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
+    Checkbutton(frame, text = "Map 1", variable = map1, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
+    Checkbutton(frame, text = "Map 2", variable = map2, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
     textoFinal= Label(frame)
     textoFinal.pack()
     
-    def quit():
-        root.destroy()
+    def iniciate_map():
+        if map1.get() + map2.get() == 2:
+            print("choose only one map")
+        elif map1.get() + map2.get() == 0:
+            print("you have to choose a map")
+        else:
+            print("map selected")
+            root.destroy()
     
     #Cuando pulsemos Aceptar desaparecerá la ventana con las opciones 
-    Button(root, text="Aceptar", command=quit).pack()
+    Button(root, text="Accept", command=iniciate_map()).pack()
     root.mainloop()
 
     
