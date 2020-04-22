@@ -77,7 +77,8 @@ def move_bullets(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks,
             collision=False
             for key in board_tanks.keys():
                 tank=board_tanks[key]
-                collision=bullet.impact(tank) and bullet.get_team()!=tank.get_team()
+                if bullet.close(tank):
+                    collision=bullet.impact(tank) and bullet.get_team()!=tank.get_team()
                 if collision:
                     semaphore_tanks.acquire()
                     tank.tank_kill()
