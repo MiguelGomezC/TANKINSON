@@ -228,10 +228,10 @@ if __name__ == '__main__':
     
         if (mapa1.get()==1 and mapa2.get()==0):
             opcionEscogida += " Mapa 1 "
-            return  1
+            return  2
         if (mapa2.get()==1 and mapa1.get()==0):
             opcionEscogida += " Mapa 2 "
-            return 2
+            return 1
         if (mapa2.get()==0 and mapa1.get()==0):
             opcionEscogida += " Elige opción "
         if (mapa2.get()==1 and mapa1.get()==1):
