@@ -88,57 +88,108 @@ def draw_board(canvas, message):
         t_orientation = tank.get_tank_orientation()
         
         #Mira como está orientado el tanque y elige la foto correspondiente
-        
-        if t_orientation > 169:
-            if t_orientation > 259:
-                if t_orientation > 304:
-                    if t_orientation > 326.5:
-                        if t_orientation > 349:
-                            canvas.create_image(x_tank-34, y_tank-27, image=tank_img_5, anchor=NW)
-                        else:
-                            canvas.create_image(x_tank-34, y_tank-27, image=tank_img_6, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-31, y_tank-29, image=tank_img_7, anchor=NW)
-                else:
-                    if t_orientation > 281.5:
-                        canvas.create_image(x_tank-26, y_tank-31, image=tank_img_8, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-22, y_tank-30, image=tank_img_9, anchor=NW)
-            else:
-                if t_orientation > 214:
-                    if t_orientation > 236:
-                        canvas.create_image(x_tank-26, y_tank-31, image=tank_img_10, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-28, y_tank-31, image=tank_img_11, anchor=NW)
-                else:
-                    if t_orientation > 191.5:
-                        canvas.create_image(x_tank-32, y_tank-28, image=tank_img_12, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-31, y_tank-26, image=tank_img_13, anchor=NW)
-            
+        if t_team == 0:
+          if t_orientation > 169:
+              if t_orientation > 259:
+                  if t_orientation > 304:
+                      if t_orientation > 326.5:
+                          if t_orientation > 349:
+                              canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_5, anchor=NW)
+                          else:
+                              canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_6, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-29, image=tank_blue_7, anchor=NW)
+                  else:
+                      if t_orientation > 281.5:
+                          canvas.create_image(x_tank-26, y_tank-31, image=tank_blue_8, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-22, y_tank-30, image=tank_blue_9, anchor=NW)
+              else:
+                  if t_orientation > 214:
+                      if t_orientation > 236:
+                          canvas.create_image(x_tank-26, y_tank-31, image=tank_blue_10, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-28, y_tank-31, image=tank_blue_11, anchor=NW)
+                  else:
+                      if t_orientation > 191.5:
+                          canvas.create_image(x_tank-32, y_tank-28, image=tank_blue_12, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-26, image=tank_blue_13, anchor=NW)
+
+          else:
+              if t_orientation > 79:
+                  if t_orientation > 124:
+                      if t_orientation > 146.5:
+                          canvas.create_image(x_tank-30, y_tank-28, image=tank_blue_14, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-29, image=tank_blue_15, anchor=NW)
+                  else:
+                      if t_orientation > 101.5:
+                          canvas.create_image(x_tank-26, y_tank-30, image=tank_blue_16, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-19, y_tank-29, image=tank_blue_1, anchor=NW)
+              else:
+                  if t_orientation > 34:
+                      if t_orientation > 56.5:
+                          canvas.create_image(x_tank-22, y_tank-28, image=tank_blue_2, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-29, y_tank-28, image=tank_blue_3, anchor=NW)
+                  else:
+                      if t_orientation > 11.5:
+                          canvas.create_image(x_tank-34, y_tank-28, image=tank_blue_4, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_5, anchor=NW)
         else:
-            if t_orientation > 79:
-                if t_orientation > 124:
-                    if t_orientation > 146.5:
-                        canvas.create_image(x_tank-30, y_tank-28, image=tank_img_14, anchor=NW)
+            if t_orientation > 169:
+                if t_orientation > 259:
+                    if t_orientation > 304:
+                        if t_orientation > 326.5:
+                            if t_orientation > 349:
+                                canvas.create_image(x_tank-34, y_tank-27, image=tank_red_5, anchor=NW)
+                            else:
+                                canvas.create_image(x_tank-34, y_tank-27, image=tank_red_6, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-29, image=tank_red_7, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-31, y_tank-29, image=tank_img_15, anchor=NW)
+                        if t_orientation > 281.5:
+                            canvas.create_image(x_tank-26, y_tank-31, image=tank_red_8, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-22, y_tank-30, image=tank_red_9, anchor=NW)
                 else:
-                    if t_orientation > 101.5:
-                        canvas.create_image(x_tank-26, y_tank-30, image=tank_img_16, anchor=NW)
+                    if t_orientation > 214:
+                        if t_orientation > 236:
+                            canvas.create_image(x_tank-26, y_tank-31, image=tank_red_10, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-28, y_tank-31, image=tank_red_11, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-19, y_tank-29, image=tank_img_1, anchor=NW)
+                        if t_orientation > 191.5:
+                            canvas.create_image(x_tank-32, y_tank-28, image=tank_red_12, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-26, image=tank_red_13, anchor=NW)
+                
             else:
-                if t_orientation > 34:
-                    if t_orientation > 56.5:
-                        canvas.create_image(x_tank-22, y_tank-28, image=tank_img_2, anchor=NW)
+                if t_orientation > 79:
+                    if t_orientation > 124:
+                        if t_orientation > 146.5:
+                            canvas.create_image(x_tank-30, y_tank-28, image=tank_red_14, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-29, image=tank_red_15, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-29, y_tank-28, image=tank_img_3, anchor=NW)
+                        if t_orientation > 101.5:
+                            canvas.create_image(x_tank-26, y_tank-30, image=tank_red_16, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-19, y_tank-29, image=tank_red_1, anchor=NW)
                 else:
-                    if t_orientation > 11.5:
-                        canvas.create_image(x_tank-34, y_tank-28, image=tank_img_4, anchor=NW)
+                    if t_orientation > 34:
+                        if t_orientation > 56.5:
+                            canvas.create_image(x_tank-22, y_tank-28, image=tank_red_2, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-29, y_tank-28, image=tank_red_3, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-34, y_tank-27, image=tank_img_5, anchor=NW)
+                        if t_orientation > 11.5:
+                            canvas.create_image(x_tank-34, y_tank-28, image=tank_red_4, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-34, y_tank-27, image=tank_red_5, anchor=NW)
         
         p_orientation = tank.get_pointer_orientation()
         
@@ -383,22 +434,39 @@ if __name__ == '__main__':
     
     #Cargamos todas las imágenes
     
-    tank_img_1 = PhotoImage(file='images/tank_1.png')
-    tank_img_2 = PhotoImage(file='images/tank_2.png')
-    tank_img_3 = PhotoImage(file='images/tank_3.png')
-    tank_img_4 = PhotoImage(file='images/tank_4.png')
-    tank_img_5 = PhotoImage(file='images/tank_5.png')
-    tank_img_6 = PhotoImage(file='images/tank_6.png')
-    tank_img_7 = PhotoImage(file='images/tank_7.png')
-    tank_img_8 = PhotoImage(file='images/tank_8.png')
-    tank_img_9 = PhotoImage(file='images/tank_9.png')
-    tank_img_10 = PhotoImage(file='images/tank_10.png')
-    tank_img_11 = PhotoImage(file='images/tank_11.png')
-    tank_img_12 = PhotoImage(file='images/tank_12.png')
-    tank_img_13 = PhotoImage(file='images/tank_13.png')
-    tank_img_14 = PhotoImage(file='images/tank_14.png')
-    tank_img_15 = PhotoImage(file='images/tank_15.png')
-    tank_img_16 = PhotoImage(file='images/tank_16.png')
+    tank_blue_1 = PhotoImage(file='images/tank_blue_1.png')
+    tank_blue_2 = PhotoImage(file='images/tank_blue_2.png')
+    tank_blue_3 = PhotoImage(file='images/tank_blue_3.png')
+    tank_blue_4 = PhotoImage(file='images/tank_blue_4.png')
+    tank_blue_5 = PhotoImage(file='images/tank_blue_5.png')
+    tank_blue_6 = PhotoImage(file='images/tank_blue_6.png')
+    tank_blue_7 = PhotoImage(file='images/tank_blue_7.png')
+    tank_blue_8 = PhotoImage(file='images/tank_blue_8.png')
+    tank_blue_9 = PhotoImage(file='images/tank_blue_9.png')
+    tank_blue_10 = PhotoImage(file='images/tank_blue_10.png')
+    tank_blue_11 = PhotoImage(file='images/tank_blue_11.png')
+    tank_blue_12 = PhotoImage(file='images/tank_blue_12.png')
+    tank_blue_13 = PhotoImage(file='images/tank_blue_13.png')
+    tank_blue_14 = PhotoImage(file='images/tank_blue_14.png')
+    tank_blue_15 = PhotoImage(file='images/tank_blue_15.png')
+    tank_blue_16 = PhotoImage(file='images/tank_blue_16.png')
+    
+    tank_red_1 = PhotoImage(file='images/tank_red_1.png')
+    tank_red_2 = PhotoImage(file='images/tank_red_2.png')
+    tank_red_3 = PhotoImage(file='images/tank_red_3.png')
+    tank_red_4 = PhotoImage(file='images/tank_red_4.png')
+    tank_red_5 = PhotoImage(file='images/tank_red_5.png')
+    tank_red_6 = PhotoImage(file='images/tank_red_6.png')
+    tank_red_7 = PhotoImage(file='images/tank_red_7.png')
+    tank_red_8 = PhotoImage(file='images/tank_red_8.png')
+    tank_red_9 = PhotoImage(file='images/tank_red_9.png')
+    tank_red_10 = PhotoImage(file='images/tank_red_10.png')
+    tank_red_11 = PhotoImage(file='images/tank_red_11.png')
+    tank_red_12 = PhotoImage(file='images/tank_red_12.png')
+    tank_red_13 = PhotoImage(file='images/tank_red_13.png')
+    tank_red_14 = PhotoImage(file='images/tank_red_14.png')
+    tank_red_15 = PhotoImage(file='images/tank_red_15.png')
+    tank_red_16 = PhotoImage(file='images/tank_red_16.png')
     
     turret_img_1 = PhotoImage(file='images/turret_1.png')
     turret_img_2 = PhotoImage(file='images/turret_2.png')
