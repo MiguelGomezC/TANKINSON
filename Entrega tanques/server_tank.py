@@ -262,7 +262,7 @@ if __name__ == '__main__':
             root.destroy()
     
     #Cuando pulsemos Aceptar desaparecerá la ventana con las opciones 
-    Button(root, text="Accept", command=iniciate_map()).pack()
+    Button(root, text="Accept", command=iniciate_map).pack()
     root.mainloop()
 
     
