@@ -24,6 +24,7 @@ class TankClass:
         self.lives = 3
         self.half_diagonal = .5*numpy.linalg.norm((31,59))
         if mapa == 1:
+            #Inicializamos la partida con cada tanque en una posición determinada
             if ini == 1:
                 self.position_x = 50
                 self.position_y =175
@@ -173,7 +174,8 @@ class TankClass:
             canon_y = length_canon*math.sin(pointer_radiants)
             return BulletClass(self.team, self.position_x+canon_x, self.position_y-canon_y, self.pointer_x, self.pointer_y)
     
-    def move(self, movement): #canvas 500x300
+    def move(self, movement): 
+        #Nos aseguramos de que el tanque se ajuste a los distintos mapas
         if movement == 1:#arriba
             if self.mapa == 1:
                 if self.tank_orientation == 270 and ((self.position_x <= 100 and self.position_x+ self.size_l >= 100) or (self.position_x <= 400 and self.position_x+ self.size_l >= 400) or (self.position_x <= 600 and self.position_x+ self.size_l >= 600) or (self.position_x <= 900 and self.position_x+ self.size_l >= 900)) and (self.position_y < 120 or (self.position_y > 255 and self.position_y < 395) or self.position_y > 530) :
@@ -725,7 +727,7 @@ class TankClass:
                             self.tank_orientation -= 7.5
 
 
-
+#BulletClass: las balas rebotan una vez antes de desaparecer, si tocan un tanque de su mismo equipo lo atraviesan
            
 class BulletClass:
     def __init__(self, team, position_x, position_y, target_x, target_y):
@@ -747,6 +749,7 @@ class BulletClass:
         newX = self.position_x + self.increment_x
         newY = self.position_y + self.increment_y
         if mapa == 1:
+            #Indicamos las posiciones de las paredes del mapa
             if self.bounce==2:
                 return False
             
