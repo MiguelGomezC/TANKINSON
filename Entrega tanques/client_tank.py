@@ -472,11 +472,11 @@ if __name__ == '__main__':
         state = (pointer_position, movement, shoot, reload)
         try:
             conn.send(state)
-        except IOError:
+        except :
             message = (([], []), 0, -1)
         try:
             message = conn.recv()
-        except EOFError:
+        except :
             message = (([], []), 0, -1)
         reload = False
         shoot = False
@@ -500,11 +500,11 @@ if __name__ == '__main__':
             state = (pointer_position, key, shoot, reload)
             try:
                 conn.send(state)
-            except IOError:
+            except :
                 message = (([], []), 0, -1)
             try:
                 message = conn.recv()
-            except EOFError:
+            except :
                 message = (([], []), 0, -1)
             reload = False
             shoot = False
