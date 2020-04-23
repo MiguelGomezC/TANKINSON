@@ -60,7 +60,7 @@ class TankClass:
                 self.pointer_y = 175
                 self.tank_orientation = 270
                 self.pointer_orientation = 90
-            else ini == 6:
+            else:
                 self.position_x = 500
                 self.position_y = 525
                 self.pointer_x = 250
