@@ -21,6 +21,14 @@ def draw_board(canvas, message):
     board, id, mapa = message
     board_tanks, board_bullets = board
     team_lives=[0,0]
+    if mapa==-1:
+        canvas.create_rectangle(00, 0, 1000, 1000,fill= "yellow")
+        canvas.create_rectangle(60, 70, 920, 520,fill= "grey30")
+        canvas.create_text(490, 230, text="GAME OVER", fill="black", font=("Arial", 80, "bold"))
+        canvas.create_image(250,330,image = estrella_gameover, anchor= NW)
+        canvas.create_image(430,330,image = estrella_gameover, anchor= NW)
+        canvas.create_image(610,330,image = estrella_gameover, anchor= NW)
+        return None
     for key, tank in board_tanks:
         (x_tank, y_tank)  = tank.get_position()
         t_team = tank.get_team()
@@ -250,14 +258,6 @@ def draw_board(canvas, message):
         canvas.create_image(965,20,image = estrella_amarilla, anchor= NW)
     
     #Pasamos a dibijar el primer mapa
-
-    if mapa==-1:
-        canvas.create_rectangle(00, 0, 1000, 1000,fill= "yellow")
-        canvas.create_rectangle(60, 70, 920, 520,fill= "grey30")
-        canvas.create_text(490, 230, text="GAME OVER", fill="black", font=("Arial", 80, "bold"))
-        canvas.create_image(250,330,image = estrella_gameover, anchor= NW)
-        canvas.create_image(430,330,image = estrella_gameover, anchor= NW)
-        canvas.create_image(610,330,image = estrella_gameover, anchor= NW)
     
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
