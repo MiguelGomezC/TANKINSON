@@ -8,7 +8,6 @@ from multiprocessing import Queue
 from tkinter import *
 import time, random
 import tankClass
-last_movement = 0
 
 #Constants inicialization
 
@@ -16,61 +15,6 @@ CANVAS_WIDTH = 1000
 CANVAS_HEIGHT = 600
 CANVAS_SCORE = 50
 
-#Son las opciones
-"""
-root2 = Tk()
-root2.title("New game")
-root2.iconbitmap("Tanque2.ico")
-
-
-def opciones_mapa():
-
-  # Realmente esto lo podemos usar para cualquier cosa
-
-    opcionEscogida = ""
-    
-    if (mapa1.get()==1 and mapa2.get()==0):
-        opcionEscogida += " Mapa 1 "
-        mapa = 1
-    if (mapa2.get()==1 and mapa1.get()==0):
-        opcionEscogida += " Mapa 2 "
-        mapa = 2
-    if (mapa2.get()==0 and mapa1.get()==0):
-        opcionEscogida += " Elige opción "
-    if (mapa2.get()==1 and mapa1.get()==1):
-        opcionEscogida += " Elige opción "
-    #♦Button(root2, text="Aceptar", command=quit).pack()
-    
-    textoFinal.config(text= opcionEscogida)
-
-mapa1 = IntVar()
-mapa2 = IntVar()
-
-
-foto = PhotoImage(file = "taque.png")
-Label(root2, image = foto).pack()
-
-frame = Frame(root2)
-frame.pack()
-
-Label(frame, text = "Elige el mapa", width = 60).pack()
-
-Checkbutton(frame, text = "Mapa 1", variable = mapa1, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
-Checkbutton(frame, text = "Mapa 2", variable = mapa2, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
-
-
-
-textoFinal= Label(frame)
-textoFinal.pack()
-
-def quit():
-    root2.destroy()
-
-
-Button(root2, text="Aceptar", command=quit).pack()
-root2.mainloop()
-
-"""
 
 def draw_board(canvas, message):
     canvas.delete('all')
@@ -431,6 +375,7 @@ if __name__ == '__main__':
     pointer_x, pointer_y = 0,0
     movement = 0
     last_movement = 0
+    bullets = 3
     
     #Cargamos todas las imágenes
     
@@ -526,14 +471,16 @@ if __name__ == '__main__':
 
     def normal_act():
         global shoot, shooted, last_time_shooted, reload
-        global movement
-        if shoot:
+        global movement, bullets
+        if shoot and bullets>0:
+            bullets -= 1
             last_time_shooted = time.time()
             shooted = True
         elif shooted:
             current_time = time.time()
             diff = current_time - last_time_shooted
             if diff >= 3:
+                bullets = 3
                 reload = True
                 shooted = False
         pointer_position = (pointer_x, pointer_y)
@@ -552,16 +499,18 @@ if __name__ == '__main__':
     
     def repet_act():
         global shoot, shooted, last_time_shooted, reload
-        global movement
+        global movement, bullets
         key = movement
         for i in range(15):
-            if shoot:
+            if shoot and bullets>0:
+                bullets -= 1
                 last_time_shooted = time.time()
                 shooted = True
             elif shooted:
                 current_time = time.time()
                 diff = current_time - last_time_shooted
                 if diff >= 3:
+                    bullets = 3
                     reload = True
                     shooted = False
             pointer_position = (pointer_x, pointer_y)
