@@ -8,7 +8,6 @@ from multiprocessing import Queue
 from tkinter import *
 import time, random
 import tankClass
-last_movement = 0
 
 #Constants inicialization
 
@@ -16,75 +15,12 @@ CANVAS_WIDTH = 1000
 CANVAS_HEIGHT = 600
 CANVAS_SCORE = 50
 
-#Son las opciones
-"""
-root2 = Tk()
-root2.title("New game")
-root2.iconbitmap("Tanque2.ico")
-
-
-def opciones_mapa():
-
-  # Realmente esto lo podemos usar para cualquier cosa
-
-    opcionEscogida = ""
-    
-    if (mapa1.get()==1 and mapa2.get()==0):
-        opcionEscogida += " Mapa 1 "
-        mapa = 1
-    if (mapa2.get()==1 and mapa1.get()==0):
-        opcionEscogida += " Mapa 2 "
-        mapa = 2
-    if (mapa2.get()==0 and mapa1.get()==0):
-        opcionEscogida += " Elige opción "
-    if (mapa2.get()==1 and mapa1.get()==1):
-        opcionEscogida += " Elige opción "
-    #♦Button(root2, text="Aceptar", command=quit).pack()
-    
-    textoFinal.config(text= opcionEscogida)
-
-mapa1 = IntVar()
-mapa2 = IntVar()
-
-
-foto = PhotoImage(file = "taque.png")
-Label(root2, image = foto).pack()
-
-frame = Frame(root2)
-frame.pack()
-
-Label(frame, text = "Elige el mapa", width = 60).pack()
-
-Checkbutton(frame, text = "Mapa 1", variable = mapa1, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
-Checkbutton(frame, text = "Mapa 2", variable = mapa2, onvalue = 1, offvalue = 0, command=opciones_mapa).pack()
-
-
-
-textoFinal= Label(frame)
-textoFinal.pack()
-
-def quit():
-    root2.destroy()
-
-
-Button(root2, text="Aceptar", command=quit).pack()
-root2.mainloop()
-
-"""
 
 def draw_board(canvas, message):
     canvas.delete('all')
     board, id, mapa = message
     board_tanks, board_bullets = board
     team_lives=[0,0]
-    if mapa==-1: #En caso de haber muerto, dibuja "game over"
-        canvas.create_rectangle(00, 0, 1000, 1000,fill= "yellow")
-        canvas.create_rectangle(60, 70, 920, 520,fill= "grey30")
-        canvas.create_text(490, 230, text="GAME OVER", fill="black", font=("Arial", 80, "bold"))
-        canvas.create_image(250,330,image = estrella_gameover, anchor= NW)
-        canvas.create_image(430,330,image = estrella_gameover, anchor= NW)
-        canvas.create_image(610,330,image = estrella_gameover, anchor= NW)
-        return None
     for key, tank in board_tanks:
         (x_tank, y_tank)  = tank.get_position()
         t_team = tank.get_team()
@@ -96,57 +32,108 @@ def draw_board(canvas, message):
         t_orientation = tank.get_tank_orientation()
         
         #Mira como está orientado el tanque y elige la foto correspondiente
-        
-        if t_orientation > 169:
-            if t_orientation > 259:
-                if t_orientation > 304:
-                    if t_orientation > 326.5:
-                        if t_orientation > 349:
-                            canvas.create_image(x_tank-34, y_tank-27, image=tank_img_5, anchor=NW)
-                        else:
-                            canvas.create_image(x_tank-34, y_tank-27, image=tank_img_6, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-31, y_tank-29, image=tank_img_7, anchor=NW)
-                else:
-                    if t_orientation > 281.5:
-                        canvas.create_image(x_tank-26, y_tank-31, image=tank_img_8, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-22, y_tank-30, image=tank_img_9, anchor=NW)
-            else:
-                if t_orientation > 214:
-                    if t_orientation > 236:
-                        canvas.create_image(x_tank-26, y_tank-31, image=tank_img_10, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-28, y_tank-31, image=tank_img_11, anchor=NW)
-                else:
-                    if t_orientation > 191.5:
-                        canvas.create_image(x_tank-32, y_tank-28, image=tank_img_12, anchor=NW)
-                    else:
-                        canvas.create_image(x_tank-31, y_tank-26, image=tank_img_13, anchor=NW)
-            
+        if t_team == 0:
+          if t_orientation > 169:
+              if t_orientation > 259:
+                  if t_orientation > 304:
+                      if t_orientation > 326.5:
+                          if t_orientation > 349:
+                              canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_5, anchor=NW)
+                          else:
+                              canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_6, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-29, image=tank_blue_7, anchor=NW)
+                  else:
+                      if t_orientation > 281.5:
+                          canvas.create_image(x_tank-26, y_tank-31, image=tank_blue_8, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-22, y_tank-30, image=tank_blue_9, anchor=NW)
+              else:
+                  if t_orientation > 214:
+                      if t_orientation > 236:
+                          canvas.create_image(x_tank-26, y_tank-31, image=tank_blue_10, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-28, y_tank-31, image=tank_blue_11, anchor=NW)
+                  else:
+                      if t_orientation > 191.5:
+                          canvas.create_image(x_tank-32, y_tank-28, image=tank_blue_12, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-26, image=tank_blue_13, anchor=NW)
+
+          else:
+              if t_orientation > 79:
+                  if t_orientation > 124:
+                      if t_orientation > 146.5:
+                          canvas.create_image(x_tank-30, y_tank-28, image=tank_blue_14, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-31, y_tank-29, image=tank_blue_15, anchor=NW)
+                  else:
+                      if t_orientation > 101.5:
+                          canvas.create_image(x_tank-26, y_tank-30, image=tank_blue_16, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-19, y_tank-29, image=tank_blue_1, anchor=NW)
+              else:
+                  if t_orientation > 34:
+                      if t_orientation > 56.5:
+                          canvas.create_image(x_tank-22, y_tank-28, image=tank_blue_2, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-29, y_tank-28, image=tank_blue_3, anchor=NW)
+                  else:
+                      if t_orientation > 11.5:
+                          canvas.create_image(x_tank-34, y_tank-28, image=tank_blue_4, anchor=NW)
+                      else:
+                          canvas.create_image(x_tank-34, y_tank-27, image=tank_blue_5, anchor=NW)
         else:
-            if t_orientation > 79:
-                if t_orientation > 124:
-                    if t_orientation > 146.5:
-                        canvas.create_image(x_tank-30, y_tank-28, image=tank_img_14, anchor=NW)
+            if t_orientation > 169:
+                if t_orientation > 259:
+                    if t_orientation > 304:
+                        if t_orientation > 326.5:
+                            if t_orientation > 349:
+                                canvas.create_image(x_tank-34, y_tank-27, image=tank_red_5, anchor=NW)
+                            else:
+                                canvas.create_image(x_tank-34, y_tank-27, image=tank_red_6, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-29, image=tank_red_7, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-31, y_tank-29, image=tank_img_15, anchor=NW)
+                        if t_orientation > 281.5:
+                            canvas.create_image(x_tank-26, y_tank-31, image=tank_red_8, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-22, y_tank-30, image=tank_red_9, anchor=NW)
                 else:
-                    if t_orientation > 101.5:
-                        canvas.create_image(x_tank-26, y_tank-30, image=tank_img_16, anchor=NW)
+                    if t_orientation > 214:
+                        if t_orientation > 236:
+                            canvas.create_image(x_tank-26, y_tank-31, image=tank_red_10, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-28, y_tank-31, image=tank_red_11, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-19, y_tank-29, image=tank_img_1, anchor=NW)
+                        if t_orientation > 191.5:
+                            canvas.create_image(x_tank-32, y_tank-28, image=tank_red_12, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-26, image=tank_red_13, anchor=NW)
+                
             else:
-                if t_orientation > 34:
-                    if t_orientation > 56.5:
-                        canvas.create_image(x_tank-22, y_tank-28, image=tank_img_2, anchor=NW)
+                if t_orientation > 79:
+                    if t_orientation > 124:
+                        if t_orientation > 146.5:
+                            canvas.create_image(x_tank-30, y_tank-28, image=tank_red_14, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-31, y_tank-29, image=tank_red_15, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-29, y_tank-28, image=tank_img_3, anchor=NW)
+                        if t_orientation > 101.5:
+                            canvas.create_image(x_tank-26, y_tank-30, image=tank_red_16, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-19, y_tank-29, image=tank_red_1, anchor=NW)
                 else:
-                    if t_orientation > 11.5:
-                        canvas.create_image(x_tank-34, y_tank-28, image=tank_img_4, anchor=NW)
+                    if t_orientation > 34:
+                        if t_orientation > 56.5:
+                            canvas.create_image(x_tank-22, y_tank-28, image=tank_red_2, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-29, y_tank-28, image=tank_red_3, anchor=NW)
                     else:
-                        canvas.create_image(x_tank-34, y_tank-27, image=tank_img_5, anchor=NW)
+                        if t_orientation > 11.5:
+                            canvas.create_image(x_tank-34, y_tank-28, image=tank_red_4, anchor=NW)
+                        else:
+                            canvas.create_image(x_tank-34, y_tank-27, image=tank_red_5, anchor=NW)
         
         p_orientation = tank.get_pointer_orientation()
         
@@ -263,6 +250,14 @@ def draw_board(canvas, message):
         canvas.create_image(965,20,image = estrella_amarilla, anchor= NW)
     
     #Pasamos a dibijar el primer mapa
+
+    if mapa==-1:
+        canvas.create_rectangle(00, 0, 1000, 1000,fill= "yellow")
+        canvas.create_rectangle(60, 70, 920, 520,fill= "grey30")
+        canvas.create_text(490, 230, text="GAME OVER", fill="black", font=("Arial", 80, "bold"))
+        canvas.create_image(250,330,image = estrella_gameover, anchor= NW)
+        canvas.create_image(430,330,image = estrella_gameover, anchor= NW)
+        canvas.create_image(610,330,image = estrella_gameover, anchor= NW)
     
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
@@ -380,25 +375,43 @@ if __name__ == '__main__':
     pointer_x, pointer_y = 0,0
     movement = 0
     last_movement = 0
+    bullets = 3
     
     #Cargamos todas las imágenes
     
-    tank_img_1 = PhotoImage(file='images/tank_1.png')
-    tank_img_2 = PhotoImage(file='images/tank_2.png')
-    tank_img_3 = PhotoImage(file='images/tank_3.png')
-    tank_img_4 = PhotoImage(file='images/tank_4.png')
-    tank_img_5 = PhotoImage(file='images/tank_5.png')
-    tank_img_6 = PhotoImage(file='images/tank_6.png')
-    tank_img_7 = PhotoImage(file='images/tank_7.png')
-    tank_img_8 = PhotoImage(file='images/tank_8.png')
-    tank_img_9 = PhotoImage(file='images/tank_9.png')
-    tank_img_10 = PhotoImage(file='images/tank_10.png')
-    tank_img_11 = PhotoImage(file='images/tank_11.png')
-    tank_img_12 = PhotoImage(file='images/tank_12.png')
-    tank_img_13 = PhotoImage(file='images/tank_13.png')
-    tank_img_14 = PhotoImage(file='images/tank_14.png')
-    tank_img_15 = PhotoImage(file='images/tank_15.png')
-    tank_img_16 = PhotoImage(file='images/tank_16.png')
+    tank_blue_1 = PhotoImage(file='images/tank_blue_1.png')
+    tank_blue_2 = PhotoImage(file='images/tank_blue_2.png')
+    tank_blue_3 = PhotoImage(file='images/tank_blue_3.png')
+    tank_blue_4 = PhotoImage(file='images/tank_blue_4.png')
+    tank_blue_5 = PhotoImage(file='images/tank_blue_5.png')
+    tank_blue_6 = PhotoImage(file='images/tank_blue_6.png')
+    tank_blue_7 = PhotoImage(file='images/tank_blue_7.png')
+    tank_blue_8 = PhotoImage(file='images/tank_blue_8.png')
+    tank_blue_9 = PhotoImage(file='images/tank_blue_9.png')
+    tank_blue_10 = PhotoImage(file='images/tank_blue_10.png')
+    tank_blue_11 = PhotoImage(file='images/tank_blue_11.png')
+    tank_blue_12 = PhotoImage(file='images/tank_blue_12.png')
+    tank_blue_13 = PhotoImage(file='images/tank_blue_13.png')
+    tank_blue_14 = PhotoImage(file='images/tank_blue_14.png')
+    tank_blue_15 = PhotoImage(file='images/tank_blue_15.png')
+    tank_blue_16 = PhotoImage(file='images/tank_blue_16.png')
+    
+    tank_red_1 = PhotoImage(file='images/tank_red_1.png')
+    tank_red_2 = PhotoImage(file='images/tank_red_2.png')
+    tank_red_3 = PhotoImage(file='images/tank_red_3.png')
+    tank_red_4 = PhotoImage(file='images/tank_red_4.png')
+    tank_red_5 = PhotoImage(file='images/tank_red_5.png')
+    tank_red_6 = PhotoImage(file='images/tank_red_6.png')
+    tank_red_7 = PhotoImage(file='images/tank_red_7.png')
+    tank_red_8 = PhotoImage(file='images/tank_red_8.png')
+    tank_red_9 = PhotoImage(file='images/tank_red_9.png')
+    tank_red_10 = PhotoImage(file='images/tank_red_10.png')
+    tank_red_11 = PhotoImage(file='images/tank_red_11.png')
+    tank_red_12 = PhotoImage(file='images/tank_red_12.png')
+    tank_red_13 = PhotoImage(file='images/tank_red_13.png')
+    tank_red_14 = PhotoImage(file='images/tank_red_14.png')
+    tank_red_15 = PhotoImage(file='images/tank_red_15.png')
+    tank_red_16 = PhotoImage(file='images/tank_red_16.png')
     
     turret_img_1 = PhotoImage(file='images/turret_1.png')
     turret_img_2 = PhotoImage(file='images/turret_2.png')
@@ -458,14 +471,16 @@ if __name__ == '__main__':
 
     def normal_act():
         global shoot, shooted, last_time_shooted, reload
-        global movement
-        if shoot:
+        global movement, bullets
+        if shoot and bullets>0:
+            bullets -= 1
             last_time_shooted = time.time()
             shooted = True
         elif shooted:
             current_time = time.time()
             diff = current_time - last_time_shooted
             if diff >= 3:
+                bullets = 3
                 reload = True
                 shooted = False
         pointer_position = (pointer_x, pointer_y)
@@ -484,16 +499,18 @@ if __name__ == '__main__':
     
     def repet_act():
         global shoot, shooted, last_time_shooted, reload
-        global movement
+        global movement, bullets
         key = movement
         for i in range(15):
-            if shoot:
+            if shoot and bullets>0:
+                bullets -= 1
                 last_time_shooted = time.time()
                 shooted = True
             elif shooted:
                 current_time = time.time()
                 diff = current_time - last_time_shooted
                 if diff >= 3:
+                    bullets = 3
                     reload = True
                     shooted = False
             pointer_position = (pointer_x, pointer_y)
@@ -528,4 +545,3 @@ if __name__ == '__main__':
 
     except TclError:
         pass
-   
