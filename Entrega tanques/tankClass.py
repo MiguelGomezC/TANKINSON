@@ -138,9 +138,9 @@ class TankClass:
         diff_y = newY - self.position_y
         if diff_x == 0:
             if diff_y >= 0:
-                self.pointer_orientation = 90
-            else:
                 self.pointer_orientation = 270
+            else:
+                self.pointer_orientation = 90
         else:
             pointer_radians = numpy.arctan(diff_y/diff_x)
             pointer_degrees = math.degrees(pointer_radians)
