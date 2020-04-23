@@ -251,7 +251,6 @@ class TankClass:
                     self.position_y -= self.step
                 elif self.tank_orientation == 270 and self.position_x + self.size_l > 750 and self.position_x < 750 and ((self.position_y +self.size_l > 412 and self.position_y+self.size_l  <= 475) or (self.position_y +self.size_l > 537.5 and self.position_y+self.size_l  <= 600)):
                     self.position_y -= self.step
-                ##
                 elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 125 and self.position_x < 125) or (self.position_x > 125 and self.position_x - self.size_l< 125)) and self.position_y > 112.5 and self.position_y+self.size_l  <= 237.5:
                     self.position_y -= self.step
                 elif self.tank_orientation == 270 and ((self.position_x + self.size_l > 375 and self.position_x < 375) or (self.position_x  > 375 and self.position_x - self.size_l< 375)) and ((self.position_y  > 112.5 and self.position_y + self.size_l  < 175) or (self.position_y - self.size_l  > 175 and self.position_y + self.size_l  < 370)):
@@ -529,7 +528,6 @@ class TankClass:
                     self.position_y += self.step
                 elif self.tank_orientation == 90 and self.position_x + self.size_l > 750 and self.position_x < 750 and ((self.position_y  > 349 and self.position_y - self.size_l <412) or (self.position_y  > 475 and self.position_y+self.size_l  <537.5)):
                     self.position_y += self.step
-                #
                 elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 125 and self.position_x < 125) or (self.position_x  > 125 and self.position_x - self.size_l< 125)) and self.position_y > 112.5 and self.position_y+self.size_l  <= 237.5:
                     self.position_y += self.step
                 elif self.tank_orientation == 90 and ((self.position_x + self.size_l > 375 and self.position_x < 375) or (self.position_x  > 375 and self.position_x - self.size_l< 375)) and ((self.position_y  > 112.5 and self.position_y + self.size_l  < 175) or (self.position_y - self.size_l  > 175 and self.position_y + self.size_l  < 370)):
