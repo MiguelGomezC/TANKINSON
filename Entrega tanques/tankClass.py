@@ -799,22 +799,22 @@ class BulletClass:
                 self.position_x = 1810-newX
                 self.increment_x *= -1
                 
-            elif self.position_x <= 170 and newX >= 170 and ((newY >= 140 and newY <= 230) or (newY >= 415 and newY <= 510)):
+            elif self.position_x <= 170 and newX >= 170 and ((newY >= 140 and newY <= 235) or (newY >= 415 and newY <= 510)):
                 self.position_x = 340-newX
                 self.bounce +=1
                 self.increment_x *= -1
                 
-            elif self.position_x <= 670 and newX >= 670 and ((newY >= 140 and newY <= 230) or (newY >= 415 and newY <= 510)):
+            elif self.position_x <= 670 and newX >= 670 and ((newY >= 140 and newY <= 235) or (newY >= 415 and newY <= 510)):
                 self.position_x = 1340 - newX
                 self.bounce +=1
                 self.increment_x *= -1
             
-            elif self.position_x >= 330 and newX <= 330 and ((newY > 140 and newY < 230) or (newY > 415 and newY < 510)):
+            elif self.position_x >= 330 and newX <= 330 and ((newY > 140 and newY < 237) or (newY > 415 and newY < 512)):
                 self.position_x = 660-newX
                 self.bounce += 1
                 self.increment_x *= -1
                 
-            elif self.position_x >= 830 and newX <= 830 and ((newY > 140 and newY < 230) or (newY > 415 and newY < 510)):
+            elif self.position_x >= 830 and newX <= 830 and ((newY > 140 and newY < 237) or (newY > 415 and newY < 512)):
                 self.position_x = 1660-newX
                 self.bounce += 1
                 self.increment_x *= -1
