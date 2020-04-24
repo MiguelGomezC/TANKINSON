@@ -261,7 +261,7 @@ def draw_board(canvas, message):
         canvas.create_image(950,20,image = estrella_amarilla, anchor= NW)
         canvas.create_image(965,20,image = estrella_amarilla, anchor= NW)
     
-    #Pasamos a dibijar el primer mapa
+    #Pasamos a dibujar el primer mapa
     
     if mapa==1:
         canvas.create_line(100,50,100,120,fill="grey99")
