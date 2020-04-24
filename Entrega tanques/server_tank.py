@@ -125,7 +125,7 @@ def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks,
     semaphore_bullets.release()
     return (board_tanks.items(), bullets_copy)
 
-def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini):
+def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini, connected_players, semaphore_connected):
     """
     Función principal del servidor. Primero, selecciona un equipo aleatorio para el primer tanque y si el tanque que accede no es el primero,
     selecciona el equipo al que le falten jugadores hasta alcanzar la igualdad. Si ambos equipos tienen el mismo número de tanques (como mucho 3)
@@ -205,10 +205,12 @@ def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, sem
     beg.send(pos_ini)
     semaphore_tanks.release()
     conn.close()
-    connected_players -= 1
+    semaphore_connected.acquire()
+    connected_players.value -= 1
+    semaphore_connected.release()
     print ('connection', id, 'closed')
 
-def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini):
+def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini, connected_players, semaphore_connected):
     """
     Proceso que mete a los clientes en la partida por orden de cola si hay hueco.
     """
@@ -216,11 +218,13 @@ def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_b
         m = end.poll(0)
         wait_semaphore.acquire()
         if connected_players.value<6 and queue.qsize()>0:
+            semaphore_connected.acquire()
             connected_players.value += 1
+            semaphore_connected.release()
             conn, last_accepted=queue.get()
             if type(m) == int:
                 position_ini = m
-            p = Process(target=serve_client, args=(conn, last_accepted, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini))
+            p = Process(target=serve_client, args=(conn, last_accepted, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini, connected_players, semaphore_connected))
             p.start()
         wait_semaphore.release()
         time.sleep(5)
@@ -239,6 +243,7 @@ if __name__ == '__main__':
     position_ini = Value('i',0)
     semaphore_count = Lock()
     connected_players = Value('i',0)
+    semaphore_connected = Lock()
     
     #Usamos Tkinter para poder elegir entre los dos mapas 
     
@@ -304,7 +309,7 @@ if __name__ == '__main__':
     queue = Queue() #lista de espera
     wait_semaphore = Lock()
     end, beg = Pipe(False) #serve_client y el propio connect notifica cuando un usuario es derrotado y queda un sitio libre, y el proceso connect lo detecta.
-    q = Process(target=connect, args = (queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini))
+    q = Process(target=connect, args = (queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini, connected_players, semaphore_connected))
     q.start()
     while True:
         print ('accepting conexions')
