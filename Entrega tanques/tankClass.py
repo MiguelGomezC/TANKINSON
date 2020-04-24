@@ -25,35 +25,35 @@ class TankClass:
         self.half_diagonal = .5*numpy.linalg.norm((31,59))
         if mapa == 1:
             #Inicializamos la partida con cada tanque en una posición determinada
-            if ini == 1:
+            if ini%6 == 1:
                 self.position_x = 50
                 self.position_y =175
                 self.pointer_x = 250
                 self.pointer_y = 175
                 self.tank_orientation = 360
                 self.pointer_orientation = 180
-            elif ini == 2:
+            elif ini%6 == 2:
                 self.position_x = 950
                 self.position_y = 475
                 self.pointer_x = 250
                 self.pointer_y = 475
                 self.tank_orientation = 180
                 self.pointer_orientation = 360
-            elif ini == 3:
+            elif ini%6 == 3:
                 self.position_x = 50
                 self.position_y =475
                 self.pointer_x = 250
                 self.pointer_y = 475
                 self.tank_orientation = 360
                 self.pointer_orientation = 180
-            elif ini == 4:
+            elif ini%6 == 4:
                 self.position_x = 950
                 self.position_y = 175
                 self.pointer_x = 250
                 self.pointer_y = 175
                 self.tank_orientation = 180
                 self.pointer_orientation = 360
-            elif ini == 5:
+            elif ini%6 == 5:
                 self.position_x = 500
                 self.position_y = 125
                 self.pointer_x = 250
@@ -68,14 +68,14 @@ class TankClass:
                 self.tank_orientation = 90
                 self.pointer_orientation = 270
         elif mapa == 2:
-           if ini == 1:
+           if ini%6 == 1:
                 self.position_x = 50
                 self.position_y = 250
                 self.pointer_x = 250
                 self.pointer_y = 150
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
-           elif ini == 2:
+           elif ini%6 == 2:
                 self.position_x = 450
                 self.position_y = 100
                 self.pointer_x = 250
@@ -83,7 +83,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif ini == 3:
+           elif ini%6 == 3:
                 self.position_x = 550
                 self.position_y = 550
                 self.pointer_x = 250
@@ -91,7 +91,7 @@ class TankClass:
                 self.tank_orientation = 45
                 self.pointer_orientation = 225
                 
-           elif ini == 4:
+           elif ini%6 == 4:
                 self.position_x = 950
                 self.position_y = 100
                 self.pointer_x = 250
@@ -99,7 +99,7 @@ class TankClass:
                 self.tank_orientation = 225
                 self.pointer_orientation = 45
                 
-           elif ini == 5:
+           elif ini%6 == 5:
                 self.position_x = 50
                 self.position_y = 550
                 self.pointer_x = 250
