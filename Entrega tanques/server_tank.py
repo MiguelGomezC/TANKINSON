@@ -250,7 +250,7 @@ if __name__ == '__main__':
     root = Tk()
     root.title("New game")
     root.resizable(0, 0)
-    root.iconbitmap("Tanque2.ico")
+    root.iconbitmap("images/tank.ico")
     
     def opciones_mapa():
         """
@@ -274,7 +274,7 @@ if __name__ == '__main__':
     
     map1 = IntVar()
     map2 = IntVar()
-    foto = PhotoImage(file = "mapita1.png")
+    foto = PhotoImage(file = "images/maps.png")
     Label(root, image = foto).pack()
     frame = Frame(root)
     frame.pack()
