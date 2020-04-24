@@ -205,6 +205,7 @@ def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, sem
     beg.send(pos_ini)
     semaphore_tanks.release()
     conn.close()
+    connected_players -= 1
     print ('connection', id, 'closed')
 
 def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_bullets,semaphore_bullets, count, semaphore_count, mapa, position_ini):
@@ -212,9 +213,10 @@ def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_b
     Proceso que mete a los clientes en la partida por orden de cola si hay hueco.
     """
     while True:
-        m = end.poll(5)
+        m = end.poll(0)
         wait_semaphore.acquire()
-        if len(board_tanks)<6 and queue.qsize()>0:
+        if connected_players.value<6 and queue.qsize()>0:
+            connected_players.value += 1
             conn, last_accepted=queue.get()
             if type(m) == int:
                 position_ini = m
@@ -235,6 +237,7 @@ if __name__ == '__main__':
     count = Value('i',0)
     position_ini = Value('i',0)
     semaphore_count = Lock()
+    connected_players = Value('i',0)
     
     #Usamos Tkinter para poder elegir entre los dos mapas 
     
