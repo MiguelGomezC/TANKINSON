@@ -223,6 +223,7 @@ def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_b
             p = Process(target=serve_client, args=(conn, last_accepted, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini))
             p.start()
         wait_semaphore.release()
+        time.sleep(5)
 
 if __name__ == '__main__':
 
