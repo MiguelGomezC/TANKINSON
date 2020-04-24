@@ -166,9 +166,9 @@ class TankClass:
         return self.bullets > 0
     
     def shoot(self):
-"""
-Si tiene balas, quita una bala de la recámara y devuelve un objeto de la clase 'Bullet', orientado en la direción del cañón.
-"""
+        """
+        Si tiene balas, quita una bala de la recámara y devuelve un objeto de la clase 'Bullet', orientado en la direción del cañón.
+        """
         if self.bullets > 0:
             self.bullets -= 1
             pointer_radiants = math.radians(self.pointer_orientation)
@@ -178,11 +178,11 @@ Si tiene balas, quita una bala de la recámara y devuelve un objeto de la clase 
             return BulletClass(self.team, self.position_x+canon_x, self.position_y-canon_y, self.pointer_x, self.pointer_y)
     
     def move(self, movement): 
-"""
-Mueve el tanque en función del mapa en el que esté y en la orientación en la que estuviera (si estaba apuntando hacia abajo y vamos
-a hacia arriba tendrá que darse la vuelta mientras avanza). Esa función tiene en cuenta que el origen de coordenadas en nuestra ventana 
-se encuentra en la esquina superior izquierda.
-"""
+        """
+        Mueve el tanque en función del mapa en el que esté y en la orientación en la que estuviera (si estaba apuntando hacia abajo y vamos
+        a hacia arriba tendrá que darse la vuelta mientras avanza). Esa función tiene en cuenta que el origen de coordenadas en nuestra ventana 
+        se encuentra en la esquina superior izquierda.
+        """
         #Nos aseguramos de que el tanque se ajuste a los distintos mapas
         if movement == 1:#arriba
             if self.mapa == 1:
@@ -1342,10 +1342,10 @@ class BulletClass:
         return self.get_team()!=tank.get_team() and tank.half_diagonal>numpy.linalg.norm((self.position_x-tank.position_x,self.position_y-tank.position_y))
     
     def impact(self,tank):
-"""
-Comprueba si la bala ha impactado con el tanque que recibe como argumento, comprobando las coordenadas de ambos y la orientación
-del tanque en ese momento.
-"""
+        """
+        Comprueba si la bala ha impactado con el tanque que recibe como argumento, comprobando las coordenadas de ambos y la orientación
+        del tanque en ese momento.
+        """
         angle = (-1)*tank.tank_orientation*2*math.pi/360
         vector_translated = (self.position_x-tank.position_x, self.position_y-tank.position_y)
         vector_rotated = (math.cos(angle) * vector_translated[0] - math.sin(angle) * vector_translated[1], math.sin(angle) * vector_translated[0] + math.cos(angle) * vector_translated[1])

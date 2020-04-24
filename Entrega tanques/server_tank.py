@@ -28,9 +28,9 @@ import tankClass
 
 
 def queue_copy(q):
-"""
-Función que nos devuelve una copia de la cola.
-"""
+    """
+    Función que nos devuelve una copia de la cola.
+    """
     p = []
     size = q.qsize()
     for i in range(size):
@@ -70,10 +70,10 @@ def move_bullets(board_bullets, semaphore_bullets, board_tanks, mapa):
         time.sleep(0.01)
 """
 def move_bullets(board_bullets, semaphore_bullets, board_tanks, semaphore_tanks, mapa):
-"""
-Esta función coge la cola de las balas en el tablero y se asegura de que todas se muevan. Además, en caso de que impacten con un tanque
-se asegura de que ese tanque pierda una vida (llamando a tank_kill). Como vamos a modificar tanques y balas llamamos a ambos procedimientos.
-"""
+    """
+    Esta función coge la cola de las balas en el tablero y se asegura de que todas se muevan. Además, en caso de que impacten con un tanque
+    se asegura de que ese tanque pierda una vida (llamando a tank_kill). Como vamos a modificar tanques y balas llamamos a ambos procedimientos.
+    """
     while True:#Hay que poner un lock para que no mire siempre, solo cuando haya balas
         semaphore_bullets.acquire()
         nBullets = board_bullets.qsize()
@@ -96,17 +96,17 @@ se asegura de que ese tanque pierda una vida (llamando a tank_kill). Como vamos 
         time.sleep(0.03)
 
 def clear_client(board, id):
-"""
-Elimina del tablero el tanque asociado a esa id.
-"""
+    """
+    Elimina del tablero el tanque asociado a esa id.
+    """
     print("board pop")
     board.pop(id[1])
 
 def update_board(board_tanks, board_bullets, semaphore_bullets, semaphore_tanks, id, m):
-"""
-Esta función se encarga de mover los tanques y poner los punteros hacia donde se está apuntando. También genera un objeto 'bullet' 
-si el tanque disparó (el usuario intentó disparar y pudo) y recarga si no.
-"""
+    """
+    Esta función se encarga de mover los tanques y poner los punteros hacia donde se está apuntando. También genera un objeto 'bullet' 
+    si el tanque disparó (el usuario intentó disparar y pudo) y recarga si no.
+    """
     pointer_pos, movement, shoot, reload = m
     semaphore_bullets.acquire()
     semaphore_tanks.acquire()
@@ -126,13 +126,13 @@ si el tanque disparó (el usuario intentó disparar y pudo) y recarga si no.
     return (board_tanks.items(), bullets_copy)
 
 def serve_client(conn, id, beg, board_tanks, semaphore_tanks, board_bullets, semaphore_bullets, count, semaphore_count, mapa, position_ini):
-"""
-Función principal del servidor. Primero, selecciona un equipo aleatorio para el primer tanque y si el tanque que accede no es el primero,
-selecciona el equipo al que le falten jugadores hasta alcanzar la igualdad. Si ambos equipos tienen el mismo número de tanques (como mucho 3)
-los pone por orden (si el primer jugador fue al Equipo 1, el segundo necesariamente irá al Equipo 2).
-Luego recibe el input del jugador y actualiza el tablero en consecuencia. Si un tanque pierde todas sus vidas o el jugador se desconecta, es
-expulsado de la partida.
-"""
+    """
+    Función principal del servidor. Primero, selecciona un equipo aleatorio para el primer tanque y si el tanque que accede no es el primero,
+    selecciona el equipo al que le falten jugadores hasta alcanzar la igualdad. Si ambos equipos tienen el mismo número de tanques (como mucho 3)
+    los pone por orden (si el primer jugador fue al Equipo 1, el segundo necesariamente irá al Equipo 2).
+    Luego recibe el input del jugador y actualiza el tablero en consecuencia. Si un tanque pierde todas sus vidas o el jugador se desconecta, es
+    expulsado de la partida.
+    """
     value = random.random()
     semaphore_count.acquire()
     if count.value > 0:
@@ -212,9 +212,9 @@ def connect(queue, beg, end, board_tanks, wait_semaphore,semaphore_tanks,board_b
     Proceso que mete a los clientes en la partida por orden de cola si hay hueco.
     """
     while True:
-        m = end.poll(15)
+        m = end.poll(5)
         wait_semaphore.acquire()
-        while len(board_tanks)<6 and queue.qsize()>0:
+        if len(board_tanks)<6 and queue.qsize()>0:
             conn, last_accepted=queue.get()
             if type(m) == int:
                 position_ini = m
@@ -244,9 +244,9 @@ if __name__ == '__main__':
     root.iconbitmap("Tanque2.ico")
     
     def opciones_mapa():
-"""
-Función auxiliar a la ventana que nos deja escoger mapa y se asegura de que solo se escoja una opción.
-"""
+        """
+        Función auxiliar a la ventana que nos deja escoger mapa y se asegura de que solo se escoja una opción.
+        """
         opcionEscogida = ""
     
         if (map1.get()==1 and map2.get()==0):
@@ -276,9 +276,9 @@ Función auxiliar a la ventana que nos deja escoger mapa y se asegura de que sol
     textoFinal.pack()
     
     def iniciate_map():
-"""
-Análogamente a opciones_mapa, insta al cliente a seleccionar solo un mapa, pero esta vez impreso por consola.
-"""
+        """
+        Análogamente a opciones_mapa, insta al cliente a seleccionar solo un mapa, pero esta vez impreso por consola.
+        """
         if map1.get() + map2.get() == 2:
             print("choose only one map")
         elif map1.get() + map2.get() == 0:

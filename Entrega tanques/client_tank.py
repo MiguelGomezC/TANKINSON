@@ -18,9 +18,9 @@ CANVAS_SCORE = 50
 
 
 def draw_board(canvas, message):
-"""
-Una vez recibido el mensaje del servidor, dibuja el tablero de juego, tanques, balas y marcador en consecuencia.
-"""
+    """
+    Una vez recibido el mensaje del servidor, dibuja el tablero de juego, tanques, balas y marcador en consecuencia.
+    """
     canvas.delete('all')
     board, id, mapa = message
     board_tanks, board_bullets = board
@@ -445,24 +445,24 @@ if __name__ == '__main__':
 
     
     def aiming(event):
-"""
-Apunta el puntero hacia donde este el cursor.
-"""
+        """
+        Apunta el puntero hacia donde este el cursor.
+        """
         global pointer_x
         global pointer_y 
         pointer_x, pointer_y = event.x, event.y 
     
     def shooting(event):
-"""
-Cambia la variable global a True, de manera que a continuación intentará disparar.
-"""
+        """
+        Cambia la variable global a True, de manera que a continuación intentará disparar.
+        """
         global shoot
         shoot = True
     
     def moving(event):
-"""
-Registra la tecla pulsada por el jugador para ejecutar a continuación el movimiento correspondiente.
-"""
+        """
+        Registra la tecla pulsada por el jugador para ejecutar a continuación el movimiento correspondiente.
+        """
         global movement        
         key_pressed = event.keysym
         if key_pressed == 'Up' or key_pressed == 'w':
